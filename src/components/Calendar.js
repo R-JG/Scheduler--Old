@@ -8,15 +8,17 @@ export default function Calendar(props) {
         currentDate, 
         calendarDates, 
         monthName,
-        changeMonth
+        changeMonth,
+        setSelectedDate
     } = props;
 
     const calendarSquares = calendarDates.map((date) => (
         <CalendarSquare 
-            key={date}
+            key={date.toDateString()}
             date={date}
             currentDate={currentDate}
             calendarDates={calendarDates}
+            setSelectedDate={setSelectedDate}
         />
     ));
 

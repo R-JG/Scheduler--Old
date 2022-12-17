@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Calendar from './components/Calendar';
+import DayPanel from './components/DayPanel';
 import './App.css';
 
 export default function App() {
@@ -8,6 +9,7 @@ export default function App() {
     const [ calendarDates, setCalendarDates ] = useState(
         generateDates(currentDate.getFullYear(), currentDate.getMonth())
     );
+    const [ selectedDate, setSelectedDate ] = useState(currentDate.toDateString());
 
     function generateDates(year, month) {
         const dateArray = [];
@@ -44,6 +46,10 @@ export default function App() {
                 calendarDates={calendarDates}
                 monthName={monthName}
                 changeMonth={changeMonth}
+                setSelectedDate={setSelectedDate}
+            />
+            <DayPanel 
+                selectedDate={selectedDate}
             />
         </main>
     );
