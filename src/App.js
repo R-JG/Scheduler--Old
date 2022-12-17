@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import CalendarSquare from './components/CalendarSquare';
 import './App.css';
 
 export default function App() {
@@ -23,11 +24,26 @@ export default function App() {
 
     // events will be updated independently in state, saved in local storage, and rendered upon the condition that the date object corresponds with the date saved with the event. 
 
-    console.log(calendarDates);
+    const monthName = (() => {
+        const monthArray = 
+            ['January', 'February', 'March', 'April', 'May', 'June', 
+            'July', 'August', 'September', 'October', 'November', 'December'];
+        return monthArray[calendarDates[10].getMonth()];
+    })();
+
+    const calendarSquares = calendarDates.map((date) => (
+        <CalendarSquare 
+            key={date}
+            date={date}
+        />
+    ));
 
     return (
-        <main>
-            <div className='calendar-container'></div>
+        <main className='App'>
+            <h1 className='month-name'>{monthName}</h1>
+            <div className='calendar-container'>
+                {calendarSquares}
+            </div>
         </main>
     );
 };
