@@ -1,0 +1,21 @@
+.calendar-header {
+    width: 40rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+  
+.calendar-container {
+    height: 40rem;
+    width: 40rem;
+    border: 0.25rem solid black;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+}
+  
+.header-button {
+    height: 3em;
+    width: 3em;
+}

@@ -4,23 +4,3 @@
   justify-content: flex-start;
   align-items: center;
 }
-
-.calendar-header {
-  width: 40rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-}
-
-.calendar-container {
-  height: 40rem;
-  width: 40rem;
-  border: 0.25rem solid black;
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: repeat(6, 1fr);
-}
-
-.header-button.previous-month {}
-
-.header-button.next-month {}

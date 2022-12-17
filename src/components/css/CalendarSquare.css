@@ -1,3 +1,18 @@
 .CalendarSquare {
     border: 0.09em solid black;
 }
+
+.date {
+    position: relative;
+    top: 0.25em;
+    left: 0.5em;
+}
+
+.current-date {
+    background-color: lightblue;
+}
+
+.current-month {
+    color: rgb(77, 77, 77);
+    background-color: rgb(222, 222, 222);
+}

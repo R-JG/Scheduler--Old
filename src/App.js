@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import CalendarSquare from './components/CalendarSquare';
+import Calendar from './components/Calendar';
 import './App.css';
 
 export default function App() {
@@ -30,8 +30,6 @@ export default function App() {
         setCalendarDates(generateDates(year, month));
     };
 
-    // events will be updated independently in state, saved in local storage, and rendered upon the condition that the date object corresponds with the date saved with the event. 
-
     const monthName = (() => {
         const monthArray = 
             ['January', 'February', 'March', 'April', 'May', 'June', 
@@ -39,30 +37,14 @@ export default function App() {
         return monthArray[calendarDates[10].getMonth()];
     })();
 
-    const calendarSquares = calendarDates.map((date) => (
-        <CalendarSquare 
-            key={date}
-            date={date}
-        />
-    ));
-
     return (
         <main className='App'>
-            <div className='calendar-header'>
-                <button 
-                    className='header-button previous-month'
-                    onClick={() => changeMonth('previous')}
-                >←</button>
-                <h1 className='month'>{monthName}</h1>
-                <h1 className='year'>{calendarDates[10].getFullYear()}</h1>
-                <button 
-                    className='header-button next-month'
-                    onClick={() => changeMonth('next')}
-                >→</button>
-            </div>
-            <div className='calendar-container'>
-                {calendarSquares}
-            </div>
+            <Calendar 
+                currentDate={currentDate}
+                calendarDates={calendarDates}
+                monthName={monthName}
+                changeMonth={changeMonth}
+            />
         </main>
     );
 };
