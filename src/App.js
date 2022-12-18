@@ -16,6 +16,9 @@ export default function App() {
     const [ eventFormData, setEventFormData ] = useState(
         {start: '', end: '', title: '', description: ''}
     );
+    const [ timeSelectMode, setTimeSelectMode ] = useState(
+        {eventStart: false, eventEnd: false}
+    );
 
     function generateDates(year, month) {
         const dateArray = [];
@@ -38,11 +41,26 @@ export default function App() {
         setCalendarDates(generateDates(year, month));
     };
 
-    function updateEventFormData(name, value) {
+    function updateEventFormValue(key, value) {
         setEventFormData((prevData) => ({
             ...prevData,
-            [name]: value
+            [key]: value
         }));
+    };
+
+    function updateEventFormTimes(date) {
+        let key;
+        if (timeSelectMode.eventStart) {
+            if (
+                (eventFormData.end !== '') 
+                && (date.valueOf() > eventFormData.end.valueOf())
+            ) return;
+            key = 'start';
+        }else if (timeSelectMode.eventEnd) {
+            if (date.valueOf() < eventFormData.start.valueOf()) return;
+            key = 'end';
+        } else return; 
+        updateEventFormValue(key, date);
     };
 
     function addNewEvent() {
@@ -68,8 +86,11 @@ export default function App() {
             <EventPanel 
                 events={events}
                 eventFormData={eventFormData}
+                timeSelectMode={timeSelectMode}
+                setTimeSelectMode={setTimeSelectMode}
+                setEventFormData={setEventFormData}
                 addNewEvent={addNewEvent}
-                updateEventFormData={updateEventFormData}
+                updateEventFormValue={updateEventFormValue}
             />
             <Calendar 
                 currentDate={currentDate}
@@ -77,6 +98,7 @@ export default function App() {
                 monthName={monthName}
                 changeMonth={changeMonth}
                 setSelectedDate={setSelectedDate}
+                updateEventFormTimes={updateEventFormTimes}
             />
             <DayPanel 
                 currentDate={currentDate}

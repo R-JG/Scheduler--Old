@@ -7,8 +7,14 @@ export default function CalendarSquare(props) {
         date, 
         currentDate, 
         calendarDates,
-        setSelectedDate
+        setSelectedDate,
+        updateEventFormTimes
     } = props;
+
+    function handleClick() {
+        setSelectedDate(date.toDateString());
+        updateEventFormTimes(date);
+    };
 
     function renderAsCurrentDate() {
         return (date.toDateString() === currentDate.toDateString()) 
@@ -29,7 +35,7 @@ export default function CalendarSquare(props) {
                  ${renderAsCurrentDate()}
                  ${renderAsCurrentMonth()}`
             }
-            onClick={() => setSelectedDate(date.toDateString())}
+            onClick={handleClick}
         >
             <div className={`date`}>
                 {date.getDate()}

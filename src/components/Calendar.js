@@ -9,7 +9,8 @@ export default function Calendar(props) {
         calendarDates, 
         monthName,
         changeMonth,
-        setSelectedDate
+        setSelectedDate,
+        updateEventFormTimes
     } = props;
 
     const calendarSquares = calendarDates.map((date) => (
@@ -19,6 +20,7 @@ export default function Calendar(props) {
             currentDate={currentDate}
             calendarDates={calendarDates}
             setSelectedDate={setSelectedDate}
+            updateEventFormTimes={updateEventFormTimes}
         />
     ));
 
