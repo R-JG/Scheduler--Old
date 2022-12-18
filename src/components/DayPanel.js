@@ -4,7 +4,8 @@ import './css/DayPanel.css';
 export default function DayPanel(props) {
 
     const { 
-        selectedDate, 
+        currentDate,
+        selectedDate
     } = props;
 
     function convertHourFormat(hour) {
@@ -13,12 +14,22 @@ export default function DayPanel(props) {
         return `${hour}:00 AM`;
     };
 
+    function renderAsCurrentHour(index) {
+        return ((currentDate.getHours() === index) 
+        && (currentDate.toDateString() === selectedDate)) 
+            ? 'current-hour' 
+            : '';
+    };
+
     const hourBlocks = Array.from(
         {length: 24}, 
         (value, index) => (
             <div 
                 key={index}
-                className='hour-block'
+                className={`
+                    hour-block
+                     ${renderAsCurrentHour(index)}
+                `}
             >
                 <div className='hour'>
                     {convertHourFormat(index)}

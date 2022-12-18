@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import Calendar from './components/Calendar';
+import EventsPanel from './components/EventsPanel';
 import DayPanel from './components/DayPanel';
 import './App.css';
+import { nanoid } from 'nanoid';
 
 export default function App() {
 
@@ -10,6 +12,10 @@ export default function App() {
         generateDates(currentDate.getFullYear(), currentDate.getMonth())
     );
     const [ selectedDate, setSelectedDate ] = useState(currentDate.toDateString());
+    const [ events, setEvents ] = useState([]);
+    const [ eventFormData, setEventFormData ] = useState(
+        {start: '', end: '', title: '', description: ''}
+    );
 
     function generateDates(year, month) {
         const dateArray = [];
@@ -32,6 +38,24 @@ export default function App() {
         setCalendarDates(generateDates(year, month));
     };
 
+    function updateEventFormData(name, value) {
+        setEventFormData((prevData) => ({
+            ...prevData,
+            [name]: value
+        }));
+    };
+
+    function addNewEvent() {
+        const newEvent = {
+            ...eventFormData,
+            id: nanoid(),
+        };
+        setEvents((prevEvents) => [
+            ...prevEvents,
+            newEvent
+        ]);
+    };
+
     const monthName = (() => {
         const monthArray = 
             ['January', 'February', 'March', 'April', 'May', 'June', 
@@ -41,6 +65,12 @@ export default function App() {
 
     return (
         <main className='App'>
+            <EventsPanel 
+                events={events}
+                eventFormData={eventFormData}
+                addNewEvent={addNewEvent}
+                updateEventFormData={updateEventFormData}
+            />
             <Calendar 
                 currentDate={currentDate}
                 calendarDates={calendarDates}
@@ -49,6 +79,7 @@ export default function App() {
                 setSelectedDate={setSelectedDate}
             />
             <DayPanel 
+                currentDate={currentDate}
                 selectedDate={selectedDate}
             />
         </main>

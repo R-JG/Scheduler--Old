@@ -18,7 +18,7 @@ export default function CalendarSquare(props) {
 
     function renderAsCurrentMonth() {
         return (date.getMonth() !== calendarDates[10].getMonth())
-            ? 'current-month'
+            ? 'not-current-month'
             : ''
     };
 

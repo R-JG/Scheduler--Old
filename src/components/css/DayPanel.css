@@ -1,6 +1,6 @@
 .DayPanel {
     height: 40em;
-    width: 20em;
+    max-width: 20em;
     margin-left: 4em;
     border: 0.25rem solid black;
     display: grid;
@@ -25,4 +25,8 @@
 .hour {
     font-size: 0.75em;
     padding-inline: 1em;
+}
+
+.current-hour {
+    background-color: lightblue;
 }
