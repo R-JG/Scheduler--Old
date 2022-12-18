@@ -1,7 +1,7 @@
 import React from 'react';
-import './css/EventsPanel.css';
+import './css/EventPanel.css';
 
-export default function EventsPanel(props) {
+export default function EventPanel(props) {
 
     const { 
         events, 
@@ -24,7 +24,7 @@ export default function EventsPanel(props) {
     console.log(eventFormData);
 
     return (
-        <div className='EventsPanel'>
+        <div className='EventPanel'>
             <form 
                 onSubmit={handleSubmit}
             >

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Calendar from './components/Calendar';
-import EventsPanel from './components/EventsPanel';
+import EventPanel from './components/EventPanel';
 import DayPanel from './components/DayPanel';
 import './App.css';
 import { nanoid } from 'nanoid';
@@ -65,7 +65,7 @@ export default function App() {
 
     return (
         <main className='App'>
-            <EventsPanel 
+            <EventPanel 
                 events={events}
                 eventFormData={eventFormData}
                 addNewEvent={addNewEvent}
