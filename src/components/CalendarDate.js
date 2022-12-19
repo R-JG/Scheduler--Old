@@ -1,7 +1,7 @@
 import React from 'react';
-import './css/CalendarSquare.css'
+import './css/CalendarDate.css'
 
-export default function CalendarSquare(props) {
+export default function CalendarDate(props) {
 
     const { 
         date, 
@@ -38,7 +38,7 @@ export default function CalendarSquare(props) {
     return (
         <div 
             className={
-                `CalendarSquare
+                `CalendarDate
                  ${renderAsSelectedDate()}
                  ${renderAsCurrentDate()}
                  ${renderAsCurrentMonth()}`

@@ -1,5 +1,5 @@
 import React from 'react';
-import CalendarSquare from './CalendarSquare';
+import CalendarDate from './CalendarDate';
 import './css/Calendar.css';
 
 export default function Calendar(props) {
@@ -20,8 +20,8 @@ export default function Calendar(props) {
         return monthArray[calendarDates[10].getMonth()];
     })();
 
-    const calendarSquares = calendarDates.map((date) => (
-        <CalendarSquare 
+    const CalendarDates = calendarDates.map((date) => (
+        <CalendarDate 
             key={date.toDateString()}
             date={date}
             currentDate={currentDate}
@@ -49,7 +49,7 @@ export default function Calendar(props) {
             <div className='events-container'>
             </div>
             <div className='calendar-container'>
-                {calendarSquares}
+                {CalendarDates}
             </div>
         </div>
     );
