@@ -8,6 +8,11 @@
     left: 0.5em;
 }
 
+.selected-date {
+    border-width: 0.2em;
+    border-color: cadetblue;
+}
+
 .current-date {
     background-color: lightblue;
 }

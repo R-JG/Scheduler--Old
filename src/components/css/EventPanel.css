@@ -1,14 +1,29 @@
 .EventPanel {
     height: 40em;
-    max-width: 20em;
+    width: 20em;
     margin-right: 4em;
     border: 0.25rem solid black;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: flex-start;
+    align-items: center;
+}
+
+.event-form {
+    display: grid;
+    grid-template-columns: repeat(2, 7.5em);
+    gap: 0.5em;
 }
 
 .button--add-event {
-    margin: 0.5em;
+    margin: 1.5em;
+    grid-column: 1 / 3;
+}
+
+.button--set-start-time {
+    width: 8em;
+}
+
+.button--set-end-time {
+    width: 8em;
 }

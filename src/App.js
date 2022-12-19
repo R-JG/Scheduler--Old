@@ -11,7 +11,7 @@ export default function App() {
     const [ calendarDates, setCalendarDates ] = useState(
         generateDates(currentDate.getFullYear(), currentDate.getMonth())
     );
-    const [ selectedDate, setSelectedDate ] = useState(currentDate.toDateString());
+    const [ selectedDate, setSelectedDate ] = useState(currentDate);
     const [ events, setEvents ] = useState([]);
     const [ eventFormData, setEventFormData ] = useState(
         {start: '', end: '', title: '', description: ''}
@@ -74,13 +74,6 @@ export default function App() {
         ]);
     };
 
-    const monthName = (() => {
-        const monthArray = 
-            ['January', 'February', 'March', 'April', 'May', 'June', 
-            'July', 'August', 'September', 'October', 'November', 'December'];
-        return monthArray[calendarDates[10].getMonth()];
-    })();
-
     return (
         <main className='App'>
             <EventPanel 
@@ -95,7 +88,7 @@ export default function App() {
             <Calendar 
                 currentDate={currentDate}
                 calendarDates={calendarDates}
-                monthName={monthName}
+                selectedDate={selectedDate}
                 changeMonth={changeMonth}
                 setSelectedDate={setSelectedDate}
                 updateEventFormTimes={updateEventFormTimes}

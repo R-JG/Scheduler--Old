@@ -1,6 +1,6 @@
 .DayPanel {
     height: 40em;
-    max-width: 20em;
+    width: 14em;
     margin-left: 4em;
     border: 0.25rem solid black;
     display: grid;
@@ -11,7 +11,8 @@
     font-size: 1.5em;
     padding: 0.3em;
     margin: 0;
-    border: 0.09rem solid black;
+    border: 0.2rem solid cadetblue;
+    text-align: center;
 }
 
 .hour-block {

@@ -10,6 +10,7 @@ export default function DayPanel(props) {
 
     function convertHourFormat(hour) {
         if (hour === 0) return '12:00 AM';
+        if (hour === 12) return '12:00 PM';
         if (hour > 12) return `${hour - 12}:00 PM`;
         return `${hour}:00 AM`;
     };
@@ -41,7 +42,7 @@ export default function DayPanel(props) {
     return (
         <div className='DayPanel'>
             <h1 className='selected-date--title'>
-                {selectedDate}
+                {selectedDate.toDateString()}
             </h1>
             {hourBlocks}
         </div>

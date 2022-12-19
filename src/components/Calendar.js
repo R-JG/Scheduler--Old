@@ -7,11 +7,18 @@ export default function Calendar(props) {
     const { 
         currentDate, 
         calendarDates, 
-        monthName,
+        selectedDate,
         changeMonth,
         setSelectedDate,
         updateEventFormTimes
     } = props;
+
+    const monthName = (() => {
+        const monthArray = 
+            ['January', 'February', 'March', 'April', 'May', 'June', 
+            'July', 'August', 'September', 'October', 'November', 'December'];
+        return monthArray[calendarDates[10].getMonth()];
+    })();
 
     const calendarSquares = calendarDates.map((date) => (
         <CalendarSquare 
@@ -19,6 +26,7 @@ export default function Calendar(props) {
             date={date}
             currentDate={currentDate}
             calendarDates={calendarDates}
+            selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
             updateEventFormTimes={updateEventFormTimes}
         />
@@ -37,6 +45,8 @@ export default function Calendar(props) {
                     className='header-button next-month'
                     onClick={() => changeMonth('next')}
                 >→</button>
+            </div>
+            <div className='events-container'>
             </div>
             <div className='calendar-container'>
                 {calendarSquares}

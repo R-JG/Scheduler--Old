@@ -45,6 +45,7 @@ export default function EventPanel(props) {
     return (
         <div className='EventPanel'>
             <form 
+                className='event-form'
                 onSubmit={handleSubmit}
             >
                 <button className='button--add-event'>
@@ -70,7 +71,12 @@ export default function EventPanel(props) {
                     onChange={handleChange}
                 />
                 <div>
-                    <span>Start: </span>
+                    <p>Start: </p>
+                    <p>
+                        {(typeof eventFormData.start === 'object') 
+                            ? eventFormData.start.toDateString() 
+                            : ''}
+                    </p>
                     <button 
                         name='start'
                         className='button--set-start-time'
@@ -81,7 +87,12 @@ export default function EventPanel(props) {
                     </button>
                 </div>
                 <div>
-                    <span>End: </span>
+                    <p>End: </p>
+                    <p>
+                        {(typeof eventFormData.end === 'object') 
+                            ? eventFormData.end.toDateString() 
+                            : ''}
+                    </p>
                     <button 
                         name='end'
                         className='button--set-end-time'
