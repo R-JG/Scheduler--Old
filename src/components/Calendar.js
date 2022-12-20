@@ -1,5 +1,6 @@
 import React from 'react';
 import CalendarDate from './CalendarDate';
+import CalendarEvent from './CalendarEvent';
 import './css/Calendar.css';
 
 export default function Calendar(props) {
@@ -8,6 +9,7 @@ export default function Calendar(props) {
         currentDate, 
         calendarDates, 
         selectedDate,
+        events,
         changeMonth,
         setSelectedDate,
         updateEventFormTimes
@@ -20,7 +22,34 @@ export default function Calendar(props) {
         return monthArray[calendarDates[10].getMonth()];
     })();
 
-    const CalendarDates = calendarDates.map((date) => (
+    const dateGridItemCoordinates = calendarDates.map((date, index) => (
+        {
+            date,
+            columnStart: index % 7 + 1,
+            columnEnd: index % 7 + 2,
+            rowStart: Math.ceil((index + 1) / 7),
+            rowEnd: Math.ceil((index + 1) / 7) + 1
+        }
+    ));
+
+    const CalendarEventComponents = events.map((eventItem) => {
+        const eventGridItemCoordinates = dateGridItemCoordinates.filter(
+            (dateItem) => {
+                const dateItemValue = dateItem.date.valueOf()
+                return ((dateItemValue >= eventItem.start.valueOf()) 
+                && (dateItemValue <= eventItem.end.valueOf()));
+            }
+        );
+        return (
+            <CalendarEvent 
+                key={eventItem.id}
+                event={eventItem}
+                eventGridItemCoordinates={eventGridItemCoordinates}
+            />
+        );
+    });
+
+    const CalendarDateComponents = calendarDates.map((date, index) => (
         <CalendarDate 
             key={date.toDateString()}
             date={date}
@@ -47,9 +76,10 @@ export default function Calendar(props) {
                 >→</button>
             </div>
             <div className='events-container'>
+                {CalendarEventComponents}
             </div>
             <div className='calendar-container'>
-                {CalendarDates}
+                {CalendarDateComponents}
             </div>
         </div>
     );

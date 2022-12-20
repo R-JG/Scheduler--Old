@@ -39,9 +39,6 @@ export default function EventPanel(props) {
         }));
     };
 
-    console.log(events);
-    console.log(eventFormData);
-
     return (
         <div className='EventPanel'>
             <form 

@@ -89,6 +89,7 @@ export default function App() {
                 currentDate={currentDate}
                 calendarDates={calendarDates}
                 selectedDate={selectedDate}
+                events={events}
                 changeMonth={changeMonth}
                 setSelectedDate={setSelectedDate}
                 updateEventFormTimes={updateEventFormTimes}
