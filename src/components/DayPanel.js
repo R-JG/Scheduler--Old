@@ -17,7 +17,8 @@ export default function DayPanel(props) {
 
     function renderAsCurrentHour(index) {
         return ((currentDate.getHours() === index) 
-        && (currentDate.toDateString() === selectedDate)) 
+        && (currentDate.toDateString() 
+            === selectedDate.toDateString())) 
             ? 'current-hour' 
             : '';
     };

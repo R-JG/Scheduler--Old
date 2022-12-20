@@ -100,6 +100,16 @@ export default function EventPanel(props) {
                     </button>
                 </div>                
             </form>
+            <div className='upcoming-events'>
+                <h3>Upcoming Events:</h3>
+                {events.map((event) => (
+                    <div className='temp-event' key={event.id}>
+                        <div>{event.title}</div>
+                        <div>{`From ${event.start.toDateString()}`}</div>
+                        <div>{`To ${event.end.toDateString()}`}</div>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };

@@ -27,3 +27,7 @@
 .button--set-end-time {
     width: 8em;
 }
+
+.temp-event {
+    margin-block: 2em;
+}
