@@ -2,6 +2,7 @@
     height: 40em;
     width: 20em;
     margin-right: 4em;
+    margin-block: 5em;
     border: 0.25rem solid black;
     display: flex;
     flex-direction: column;

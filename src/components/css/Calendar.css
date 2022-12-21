@@ -6,6 +6,11 @@
     align-items: center;
 }
   
+.header-button {
+    height: 3em;
+    width: 3em;
+}
+
 .calendar-container {
     height: 40rem;
     width: 40rem;
@@ -14,8 +19,10 @@
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(6, 1fr);
 }
-  
-.header-button {
-    height: 3em;
-    width: 3em;
+
+.events-container {
+    height: 40rem;
+    width: 40rem;
+    position: absolute;
+    pointer-events: none;
 }

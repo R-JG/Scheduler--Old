@@ -32,7 +32,7 @@ export default function Calendar(props) {
         }
     ));
 
-    const CalendarEventComponents = events.map((eventItem) => {
+    const CalendarEventComponents = events.reduce((accumulator, eventItem) => {
         const eventGridItemCoordinates = dateGridItemCoordinates.filter(
             (dateItem) => {
                 const dateItemValue = dateItem.date.valueOf()
@@ -40,14 +40,15 @@ export default function Calendar(props) {
                 && (dateItemValue <= eventItem.end.valueOf()));
             }
         );
-        return (
+        if (eventGridItemCoordinates.length !== 0) accumulator.push(
             <CalendarEvent 
                 key={eventItem.id}
                 event={eventItem}
-                eventGridItemCoordinates={eventGridItemCoordinates}
+                gridCoordinates={eventGridItemCoordinates}
             />
         );
-    });
+        return accumulator;
+    }, []);
 
     const CalendarDateComponents = calendarDates.map((date, index) => (
         <CalendarDate 

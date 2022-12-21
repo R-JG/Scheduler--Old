@@ -20,6 +20,11 @@ export default function EventPanel(props) {
 
     function handleSubmit(event) {
         event.preventDefault();
+        if (
+            (eventFormData.start === '') 
+            || (eventFormData.end === '')
+            || (eventFormData.title === '')
+        ) return;
         addNewEvent();
         setEventFormData(
             {start: '', end: '', title: '', description: ''}
