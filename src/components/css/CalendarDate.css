@@ -14,10 +14,10 @@
 }
 
 .current-date {
-    background-color: lightblue;
+    background-color: rgba(135, 225, 255, 0.5);
 }
 
 .not-current-month {
     color: rgb(77, 77, 77);
-    background-color: rgb(222, 222, 222);
+    background-color: rgba(222, 222, 222, 0.8);
 }

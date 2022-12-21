@@ -15,6 +15,8 @@
     height: 40rem;
     width: 40rem;
     border: 0.25rem solid black;
+    position: absolute;
+    z-index: 2;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(6, 1fr);
@@ -24,5 +26,5 @@
     height: 40rem;
     width: 40rem;
     position: absolute;
-    pointer-events: none;
+    z-index: 1;
 }

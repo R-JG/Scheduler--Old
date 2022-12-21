@@ -44,6 +44,18 @@ export default function EventPanel(props) {
         }));
     };
 
+    const eventList = events.map((event) => (
+        <div className='temp-event' key={event.id}>
+            <div 
+                className='event-color-tag'
+                style={{backgroundColor: `hsl(${event.color})`}}
+            ></div>
+            <div>{event.title}</div>
+            <div>{`From ${event.start.toDateString()}`}</div>
+            <div>{`To ${event.end.toDateString()}`}</div>
+        </div>
+    ))
+
     return (
         <div className='EventPanel'>
             <form 
@@ -107,13 +119,7 @@ export default function EventPanel(props) {
             </form>
             <div className='upcoming-events'>
                 <h3>Upcoming Events:</h3>
-                {events.map((event) => (
-                    <div className='temp-event' key={event.id}>
-                        <div>{event.title}</div>
-                        <div>{`From ${event.start.toDateString()}`}</div>
-                        <div>{`To ${event.end.toDateString()}`}</div>
-                    </div>
-                ))}
+                {eventList}
             </div>
         </div>
     );

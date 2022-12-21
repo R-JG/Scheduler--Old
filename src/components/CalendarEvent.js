@@ -31,7 +31,8 @@ export default function CalendarEvent(props) {
     const eventBlockElements = eventBlocks.map((block) => {
         const gridItemStyle = {
             gridColumn: `${block.columnStart} / ${block.columnEnd}`,
-            gridRow: `${block.rowStart} / ${block.rowEnd}`
+            gridRow: `${block.rowStart} / ${block.rowEnd}`,
+            backgroundColor: `hsl(${event.color})`
         };
         return (
             <div
@@ -39,7 +40,8 @@ export default function CalendarEvent(props) {
                 className='event-block'
                 style={gridItemStyle}
             >
-                TEST
+                {(eventBlocks[0] === block) 
+                && <div className='event-title'>{event.title}</div>}
             </div>
         );
     });

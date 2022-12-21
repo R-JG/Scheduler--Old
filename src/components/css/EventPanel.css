@@ -32,3 +32,8 @@
 .temp-event {
     margin-block: 2em;
 }
+
+.event-color-tag {
+    height: 1em;
+    width: 1em;
+}

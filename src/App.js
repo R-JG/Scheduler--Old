@@ -67,11 +67,17 @@ export default function App() {
         const newEvent = {
             ...eventFormData,
             id: nanoid(),
+            color: getRandomHSLColor()
         };
         setEvents((prevEvents) => [
             ...prevEvents,
             newEvent
         ]);
+    };
+
+    function getRandomHSLColor() {
+        const randomNumber = Math.floor(Math.random() * 361);
+        return `${randomNumber}, 100%, 50%`;
     };
 
     return (

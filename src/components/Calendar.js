@@ -76,11 +76,11 @@ export default function Calendar(props) {
                     onClick={() => changeMonth('next')}
                 >→</button>
             </div>
-            <div className='events-container'>
-                {CalendarEventComponents}
-            </div>
             <div className='calendar-container'>
                 {CalendarDateComponents}
+            </div>
+            <div className='events-container'>
+                {CalendarEventComponents}
             </div>
         </div>
     );

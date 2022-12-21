@@ -10,5 +10,16 @@
 }
 
 .event-block {
-    background-color: tomato;
+    height: 25%;
+    position: relative;
+    top: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.event-title {
+    font-size: 0.75em;
+    margin-inline: 1em;
 }
