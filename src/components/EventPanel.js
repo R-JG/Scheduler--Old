@@ -29,6 +29,9 @@ export default function EventPanel(props) {
         setEventFormData(
             {start: '', end: '', title: '', description: ''}
         );
+        setTimeSelectMode(
+            {eventStart: false, eventEnd: false}
+        );
     };
 
     function handleSetTimeButtons(event) {

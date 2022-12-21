@@ -8,6 +8,7 @@ export default function CalendarDate(props) {
         currentDate, 
         calendarDates,
         selectedDate,
+        eventFormData,
         setSelectedDate,
         updateEventFormTimes
     } = props;
@@ -35,13 +36,31 @@ export default function CalendarDate(props) {
             : '';
     };
 
+    function renderAsFormDateSelection() {
+        if ((eventFormData.start !== '') && (eventFormData.end === '')) {
+            return (date.toDateString() === eventFormData.start.toDateString())
+                ? 'form-date-selection'
+                : '';
+        } else if((eventFormData.start === '') && (eventFormData.end !== '')) {
+            return (date.toDateString() === eventFormData.end.toDateString())
+                ? 'form-date-selection'
+                : '';
+        } else {
+            return ((date.valueOf() >= eventFormData.start.valueOf())
+            && (date.valueOf() <= eventFormData.end.valueOf())) 
+                ? 'form-date-selection'
+                : '';
+        };
+    };
+
     return (
         <div 
             className={
                 `CalendarDate
                  ${renderAsSelectedDate()}
                  ${renderAsCurrentDate()}
-                 ${renderAsCurrentMonth()}`
+                 ${renderAsCurrentMonth()}
+                 ${renderAsFormDateSelection()}`
             }
             onClick={handleClick}
         >

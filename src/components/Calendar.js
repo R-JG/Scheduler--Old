@@ -10,6 +10,7 @@ export default function Calendar(props) {
         calendarDates, 
         selectedDate,
         events,
+        eventFormData,
         changeMonth,
         setSelectedDate,
         updateEventFormTimes
@@ -57,6 +58,7 @@ export default function Calendar(props) {
             currentDate={currentDate}
             calendarDates={calendarDates}
             selectedDate={selectedDate}
+            eventFormData={eventFormData}
             setSelectedDate={setSelectedDate}
             updateEventFormTimes={updateEventFormTimes}
         />

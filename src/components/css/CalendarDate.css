@@ -21,3 +21,7 @@
     color: rgb(77, 77, 77);
     background-color: rgba(222, 222, 222, 0.8);
 }
+
+.form-date-selection {
+    background-color: rgba(0, 0, 0, 0.5);
+}
