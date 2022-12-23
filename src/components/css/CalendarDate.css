@@ -1,5 +1,6 @@
 .CalendarDate {
     border: 0.09em solid black;
+    user-select: none;
 }
 
 .date {

@@ -13,9 +13,13 @@ export default function CalendarDate(props) {
         updateEventFormTimes
     } = props;
 
-    function handleClick() {
+    function handleMouseDown() {
         setSelectedDate(date);
         updateEventFormTimes(date);
+    };
+
+    function handleMouseOver(event) {
+        if (event.buttons) updateEventFormTimes(date);
     };
 
     function renderAsSelectedDate() {
@@ -62,7 +66,8 @@ export default function CalendarDate(props) {
                  ${renderAsCurrentMonth()}
                  ${renderAsFormDateSelection()}`
             }
-            onClick={handleClick}
+            onMouseDown={handleMouseDown}
+            onMouseOver={handleMouseOver}
         >
             <div className={`date`}>
                 {date.getDate()}

@@ -51,8 +51,7 @@ export default function App() {
     function updateEventFormTimes(date) {
         let key;
         if (timeSelectMode.eventStart) {
-            if (
-                (eventFormData.end !== '') 
+            if ((eventFormData.end !== '') 
                 && (date.valueOf() > eventFormData.end.valueOf())
             ) return;
             key = 'start';
@@ -61,6 +60,8 @@ export default function App() {
             key = 'end';
         } else return; 
         updateEventFormValue(key, date);
+        if ((key === 'start') && (eventFormData.end === '')) 
+            setTimeSelectMode({eventStart: false, eventEnd: true});
     };
 
     function addNewEvent() {
