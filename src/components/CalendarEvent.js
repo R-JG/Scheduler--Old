@@ -4,9 +4,22 @@ import './css/CalendarEvent.css';
 export default function CalendarEvent(props) {
 
     const { 
-        event, 
-        gridCoordinates
+        event,
+        gridCoordinates,
+        selection,
+        updateSelection,
     } = props;
+
+    function handleClick() {
+        updateSelection('event', event);
+    };
+
+    function renderAsSelectedEvent() {
+        if (selection.type !== 'event') return;
+        return (selection.value.id === event.id)
+            ? 'selected-event' 
+            : '';
+    };
 
     const eventBlocks = (() => {
         const eventBlockFactory = (index) => ({
@@ -37,8 +50,9 @@ export default function CalendarEvent(props) {
         return (
             <div
                 key={gridItemStyle.gridRow}
-                className='event-block'
+                className={`event-block ${renderAsSelectedEvent()}`}
                 style={gridItemStyle}
+                onClick={handleClick}
             >
                 {(eventBlocks[0] === block) 
                 && <div className='event-title'>{event.title}</div>}

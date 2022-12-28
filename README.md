@@ -38,6 +38,12 @@ When these buttons are clicked, the calendar and day panel will be set to a mode
 Design solution for multiple events overlapping on the calendar:
 The events will only ever take up the same strip of space on each date square.
 If there are multiple events in one date, there will be coloured blocks stacked in horizontal series.
+-
+Alternate:
+Strips of events on each calendar row will be skewed indicating the multiple different events.
+One will be able to scroll through the strips, changing their z-index.
+Maybe the default appearance of the strips could be a slightly spread out card deck look, just showing enough to indicate the events on the day, and mousing over could fan them out.
+The fewer columns taken up by a strip (the greater the distance between col start and col end), the higher the z-index of the strip, i.e. longer strips will be more anchored to the bottom of the row.
 
 _______________
 Day view:
@@ -45,12 +51,16 @@ Day view:
 Idea for solving the problem of need for specification of events by minute: click and hold on the hour brings up a minutes window for the hour. Releasing the click selects the minute.
 
 
+Design idea for the day view ->
+The list is scrollable and boundless, i.e. one can scroll up or down at the very least for the whole time frame rendered in the calendar window.
+Scrolling to a new day changes the selected day to it(?)
+Selecting a day on the calendar scrolls the day view to the beginning of the selected day (animation)
+Aesthetic contrast between the definite, blocky series of squares of the calendar, and the fluid scrollable vertical day view field. Interacting with one affects the other.
 
 
 
-Features to add:
+Other features to add:
 - multiple event rendering on a calendar date 
 - event delete and edit
-- day panel events
-- event list
+- make the create event window collapsable, and remove the event list
 - jump to current date button

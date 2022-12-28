@@ -7,14 +7,14 @@ export default function CalendarDate(props) {
         date, 
         currentDate, 
         calendarDates,
-        selectedDate,
+        selection,
         eventFormData,
-        setSelectedDate,
+        updateSelection,
         updateEventFormTimes
     } = props;
 
     function handleMouseDown() {
-        setSelectedDate(date);
+        updateSelection('date', date);
         updateEventFormTimes(date);
     };
 
@@ -23,7 +23,8 @@ export default function CalendarDate(props) {
     };
 
     function renderAsSelectedDate() {
-        return (date.toDateString() === selectedDate.toDateString())
+        if (selection.type !== 'date') return;
+        return (date.toDateString() === selection.value.toDateString())
             ? 'selected-date' 
             : '';
     };

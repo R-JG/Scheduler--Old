@@ -4,8 +4,7 @@
     margin-left: 4em;
     margin-block: 5em;
     border: 0.25rem solid black;
-    display: grid;
-    grid-template-rows: repeat(24, 1fr);
+    overflow: scroll;
 }
 
 .selected-date--title {
@@ -17,6 +16,7 @@
 }
 
 .hour-block {
+    height: 2em;
     border: 0.09em solid black;
     display: flex;
     flex-direction: row;

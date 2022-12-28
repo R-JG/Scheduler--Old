@@ -11,7 +11,7 @@ export default function App() {
     const [ calendarDates, setCalendarDates ] = useState(
         generateDates(currentDate.getFullYear(), currentDate.getMonth())
     );
-    const [ selectedDate, setSelectedDate ] = useState(currentDate);
+    const [ selection, setSelection ] = useState({type: 'date', value: currentDate});
     const [ events, setEvents ] = useState([]);
     const [ eventFormData, setEventFormData ] = useState(
         {start: '', end: '', title: '', description: ''}
@@ -39,6 +39,10 @@ export default function App() {
         if (direction === 'next') month++;
         if (direction === 'previous') month--;
         setCalendarDates(generateDates(year, month));
+    };
+
+    function updateSelection(type, value) {
+        setSelection({type, value});
     };
 
     function updateEventFormValue(key, value) {
@@ -95,16 +99,17 @@ export default function App() {
             <Calendar 
                 currentDate={currentDate}
                 calendarDates={calendarDates}
-                selectedDate={selectedDate}
+                selection={selection}
                 events={events}
                 eventFormData={eventFormData}
                 changeMonth={changeMonth}
-                setSelectedDate={setSelectedDate}
+                updateSelection={updateSelection}
                 updateEventFormTimes={updateEventFormTimes}
             />
             <DayPanel 
+                calendarDates={calendarDates}
                 currentDate={currentDate}
-                selectedDate={selectedDate}
+                selection={selection}
             />
         </main>
     );

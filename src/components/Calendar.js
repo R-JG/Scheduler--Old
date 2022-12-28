@@ -8,11 +8,11 @@ export default function Calendar(props) {
     const { 
         currentDate, 
         calendarDates, 
-        selectedDate,
+        selection,
         events,
         eventFormData,
         changeMonth,
-        setSelectedDate,
+        updateSelection,
         updateEventFormTimes
     } = props;
 
@@ -46,6 +46,8 @@ export default function Calendar(props) {
                 key={eventItem.id}
                 event={eventItem}
                 gridCoordinates={eventGridItemCoordinates}
+                selection={selection}
+                updateSelection={updateSelection}
             />
         );
         return accumulator;
@@ -57,9 +59,9 @@ export default function Calendar(props) {
             date={date}
             currentDate={currentDate}
             calendarDates={calendarDates}
-            selectedDate={selectedDate}
+            selection={selection}
             eventFormData={eventFormData}
-            setSelectedDate={setSelectedDate}
+            updateSelection={updateSelection}
             updateEventFormTimes={updateEventFormTimes}
         />
     ));

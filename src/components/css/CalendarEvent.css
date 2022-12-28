@@ -1,3 +1,11 @@
+.CalendarEvent:hover {
+    filter: brightness(222%);
+}
+
+.CalendarEvent:active {
+    filter: brightness(300%);
+}
+
 .calendar-grid {
     height: 40rem;
     width: 40rem;
@@ -6,20 +14,28 @@
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(6, 1fr);
-    pointer-events: none;
+
 }
 
 .event-block {
     height: 25%;
+    border: 0.2em solid transparent;
+    border-radius: 0.7em;
     position: relative;
     top: 50%;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
+    pointer-events: all;
+    user-select: none;
 }
 
 .event-title {
     font-size: 0.75em;
     margin-inline: 1em;
+}
+
+.selected-event {
+    border-color: cadetblue;
 }
