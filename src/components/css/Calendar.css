@@ -22,7 +22,7 @@
     grid-template-rows: repeat(6, 1fr);
 }
 
-.events-container {
+.events-container--calendar {
     height: 40rem;
     width: 40rem;
     position: absolute;

@@ -1,10 +1,15 @@
+:root {
+    --DayPanel-width: 14rem;
+}
+
 .DayPanel {
     height: 40em;
-    width: 14em;
+    width: var(--DayPanel-width);
     margin-left: 4em;
     margin-block: 5em;
     border: 0.25rem solid black;
     overflow: scroll;
+    position: relative;
 }
 
 .selected-date--title {
@@ -15,20 +20,40 @@
     text-align: center;
 }
 
-.hour-block {
+.full-day-hour-block {
+    display: grid;
+    grid-template-rows: repeat(24, 1fr);
+}
+
+.hour {
     height: 2em;
-    border: 0.09em solid black;
+    border: 0.075em solid black;
+    box-sizing: border-box;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
 }
 
-.hour {
+.hour-text {
     font-size: 0.75em;
     padding-inline: 1em;
 }
 
 .current-hour {
     background-color: lightblue;
+}
+
+.events-container--day-panel {
+    width: 100%;
+    position: absolute;
+    display: grid;
+    grid-template-columns: 5em;
+    grid-auto-columns: 1.5em;
+    grid-template-rows: repeat(calc(42 * 24), 2em);
+    column-gap: 1em;
+}
+
+.event-column {
+    border-radius: 0.6em;
 }

@@ -24,10 +24,13 @@ export default function App() {
         const dateArray = [];
         const dayMonthBegins = new Date(year, month, 1).getDay();
         for (let i = 0; i < 42; i++) {
-            let dayValue = i - dayMonthBegins;
+            let dayValue = i - dayMonthBegins + 1;
+            // note: this code below was added originally because I thought that using 0 as the date argument returned the last date of the month, but this turned out to actually just skip over the last day of the previous month.
+            /*
             if (i >= dayMonthBegins) {
                 dayValue++;
             };
+            */
             dateArray.push(new Date(year, month, dayValue));
         };
         return dateArray;
@@ -110,6 +113,7 @@ export default function App() {
                 calendarDates={calendarDates}
                 currentDate={currentDate}
                 selection={selection}
+                events={events}
             />
         </main>
     );

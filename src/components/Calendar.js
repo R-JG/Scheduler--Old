@@ -83,7 +83,7 @@ export default function Calendar(props) {
             <div className='calendar-container'>
                 {CalendarDateComponents}
             </div>
-            <div className='events-container'>
+            <div className='events-container--calendar'>
                 {CalendarEventComponents}
             </div>
         </div>

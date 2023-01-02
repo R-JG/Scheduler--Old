@@ -7,6 +7,7 @@ export default function DayPanel(props) {
         calendarDates,
         currentDate,
         selection,
+        events
     } = props;
 
     const dayPanelRef = useRef(null);
@@ -24,23 +25,23 @@ export default function DayPanel(props) {
         };
     }, [selection]);
 
-    function scrollToDate(dateObject) {
-        const dateIndex = calendarDates.findIndex((date) => (
+    function getCalendarDateIndex(dateObject) {
+        return calendarDates.findIndex((date) => (
             date.toDateString() === dateObject.toDateString()
         ));
-        const targetHour = (dateIndex * 24) + 12;
-        dayPanelRef.current.children[targetHour].scrollIntoView(
+    };
+
+    function scrollToDate(dateObject) {
+        const dateIndex = getCalendarDateIndex(dateObject);
+        dayPanelRef.current.children[dateIndex + 1].scrollIntoView(
             {behavior: 'smooth', block: 'center'}
         );
     };
 
     function scrollToEvent(eventObject) {
         if (typeof eventObject !== 'object') return;
-        const dateIndex = calendarDates.findIndex((date) => (
-            date.toDateString() === eventObject.start.toDateString()
-        ));
-        const targetHour = (dateIndex * 24) + eventObject.start.getHours();
-        dayPanelRef.current.children[targetHour].scrollIntoView(
+        const dateIndex = getCalendarDateIndex(eventObject.start);
+        dayPanelRef.current.children[dateIndex + 1].scrollIntoView(
             {behavior: 'smooth', block: 'center'}
         );
     };
@@ -52,34 +53,86 @@ export default function DayPanel(props) {
         return `${hour}:00 AM`;
     };
 
-    // Changes to make:
-    // try putting the 24h divs into their own div container so that there might be scroll events per day 
-    // this would not visually affect the list 
-
     const hoursOfDayElementArrayFactory = () => Array.from(
         {length: 24}, 
         (value, index) => {
             return (
-            <div 
-                key={index}
-                className={`
-                    hour-block
-                `}
-            >
-                <div className='hour'>
+            <div key={index} className='hour'>
+                <div className='hour-text'>
                     {convertHourFormat(index)}
                 </div>
             </div>
         );}
     );
 
-    const totalSetOfHourElements = calendarDates.map(
-        (date) => hoursOfDayElementArrayFactory(date)
+    const eventColumnElements = (() => {
+        let eventOverlapRecord = [];
+        const elementArray = events.reduce((accumulator, currentEvent) => {
+            if ((currentEvent.end.valueOf() <= calendarDates[0].valueOf()) 
+            || (currentEvent.start.valueOf() >= calendarDates[41].valueOf())) {
+                return accumulator;
+            };
+            let startDateIndex = getCalendarDateIndex(currentEvent.start);
+            let endDateIndex = getCalendarDateIndex(currentEvent.end);
+            if (startDateIndex === -1) startDateIndex = 0;
+            if (endDateIndex === -1) endDateIndex = 41;
+            const gridRowStart = (startDateIndex * 24) + 1;
+            const gridRowEnd = ((endDateIndex + 1) * 24) + 1;
+            let gridColumnStart;
+            for (let i = 2; i <= (events.length + 1); i++) {
+                const isOverlapping = eventOverlapRecord.some((event) => {
+                    if (event.gridColumnStart === i) {
+                        return ((event.gridRowStart < gridRowEnd) 
+                        && (event.gridRowEnd > gridRowStart));
+                    };
+                });
+                if (!isOverlapping) {
+                    gridColumnStart = i;
+                    break;
+                };
+            };
+            const gridColumnEnd = gridColumnStart + 1;
+            eventOverlapRecord.push({
+                gridRowStart,
+                gridRowEnd,
+                gridColumnStart,
+                gridColumnEnd
+            });
+            const gridItemStyle = {
+                gridRow: `${gridRowStart} / ${gridRowEnd}`,
+                gridColumn: `${gridColumnStart} / ${gridColumnEnd}`,
+                backgroundColor: `hsl(${currentEvent.color})`
+            };
+            accumulator.push(
+                <div 
+                    key={'DayPanel' + currentEvent.id}
+                    className='event-column'
+                    style={gridItemStyle}
+                    >
+                </div>
+            );
+            return accumulator;
+        }, []);
+        return elementArray;
+    })();
+
+    const dailyHourBlockElements = calendarDates.map(
+        (date) => (
+            <div 
+                key={date.toDateString()}
+                className='full-day-hour-block'
+            >
+                {hoursOfDayElementArrayFactory()}
+            </div>
+        )
     );
 
     return (
         <div ref={dayPanelRef} className='DayPanel'>
-            {totalSetOfHourElements}
+            <div className='events-container--day-panel'>
+                {eventColumnElements}
+            </div>
+            {dailyHourBlockElements}
         </div>
     );
 };

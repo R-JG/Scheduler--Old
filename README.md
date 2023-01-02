@@ -60,7 +60,16 @@ Aesthetic contrast between the definite, blocky series of squares of the calenda
 
 
 Other features to add:
+- render events on day panel
+- selecting an event opens up its details in a popup / expanded window within day panel.
 - multiple event rendering on a calendar date 
+- the ability to specify event start and end down to the minute; display accordingly
 - event delete and edit
+- scrolling through day panel changes the selected date to where you are scrolling (idea: since there is auto scrolling based on updates to selection, this will cause a redundant scrolling issue. This can be resolved by creating local state on day panel that gets set if a scroll event that updates selection is triggered, and this local state, via a conditional on the useEffect scrollTo functions, will prevent the auto scroll from running)
+- gray out the hour sections in the day panel corresponding to the grayed out dates on the calendar.
 - make the create event window collapsable, and remove the event list
+- Change event description to note, and add the ability to add multiple distinct notes to a single event. these will render, when the event info is expanded, as different bullet points. in edit mode, all of these things can be added or changed.
 - jump to current date button
+- option to display local holidays on the calendar (not in day panel) ?
+- finalize design
+- dev notes to the code

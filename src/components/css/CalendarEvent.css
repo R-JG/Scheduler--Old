@@ -1,5 +1,5 @@
 .CalendarEvent:hover {
-    filter: brightness(222%);
+    filter: opacity(0.5);
 }
 
 .CalendarEvent:active {
