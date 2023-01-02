@@ -34,7 +34,7 @@ export default function DayPanel(props) {
     function scrollToDate(dateObject) {
         const dateIndex = getCalendarDateIndex(dateObject);
         dayPanelRef.current.children[dateIndex + 1].scrollIntoView(
-            {behavior: 'smooth', block: 'center'}
+            {behavior: 'smooth', block: 'start'}
         );
     };
 
@@ -42,7 +42,7 @@ export default function DayPanel(props) {
         if (typeof eventObject !== 'object') return;
         const dateIndex = getCalendarDateIndex(eventObject.start);
         dayPanelRef.current.children[dateIndex + 1].scrollIntoView(
-            {behavior: 'smooth', block: 'center'}
+            {behavior: 'smooth', block: 'start'}
         );
     };
 
@@ -63,6 +63,17 @@ export default function DayPanel(props) {
                 </div>
             </div>
         );}
+    );
+
+    const dailyHourBlockElements = calendarDates.map(
+        (date) => (
+            <div 
+                key={date.toDateString()}
+                className='full-day-hour-block'
+            >
+                {hoursOfDayElementArrayFactory()}
+            </div>
+        )
     );
 
     const eventColumnElements = (() => {
@@ -109,23 +120,21 @@ export default function DayPanel(props) {
                     className='event-column'
                     style={gridItemStyle}
                     >
+                        {(currentEvent.id === selection.value.id) 
+                        && 
+                        <div 
+                            className='expanded-event-column'
+                            style={{backgroundColor: `hsl(${currentEvent.color})`}}
+                            >
+                                <h1>{currentEvent.title}</h1>
+                                <p>{currentEvent.description}</p>
+                        </div>}
                 </div>
             );
             return accumulator;
         }, []);
         return elementArray;
     })();
-
-    const dailyHourBlockElements = calendarDates.map(
-        (date) => (
-            <div 
-                key={date.toDateString()}
-                className='full-day-hour-block'
-            >
-                {hoursOfDayElementArrayFactory()}
-            </div>
-        )
-    );
 
     return (
         <div ref={dayPanelRef} className='DayPanel'>

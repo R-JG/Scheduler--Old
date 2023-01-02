@@ -8,10 +8,21 @@ export default function EventPanel(props) {
         eventFormData, 
         timeSelectMode,
         setTimeSelectMode,
+        setCreateEventMode,
         setEventFormData,
         addNewEvent,
         updateEventFormValue 
     } = props;
+
+    function closeCreateEvent() {
+        setEventFormData(
+            {start: '', end: '', title: '', description: ''}
+        );
+        setTimeSelectMode(
+            {eventStart: false, eventEnd: false}
+        );
+        setCreateEventMode(false);
+    };
 
     function handleChange(event) {
         const { name, value } = event.target;
@@ -26,12 +37,7 @@ export default function EventPanel(props) {
             || (eventFormData.title === '')
         ) return;
         addNewEvent();
-        setEventFormData(
-            {start: '', end: '', title: '', description: ''}
-        );
-        setTimeSelectMode(
-            {eventStart: false, eventEnd: false}
-        );
+        closeCreateEvent();
     };
 
     function handleSetTimeButtons(event) {
@@ -124,6 +130,11 @@ export default function EventPanel(props) {
                 <h3>Upcoming Events:</h3>
                 {eventList}
             </div>
+            <button 
+                className='button--cancel-create-event'
+                onClick={closeCreateEvent}>
+                X
+            </button>
         </div>
     );
 };

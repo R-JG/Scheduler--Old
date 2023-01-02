@@ -1,12 +1,9 @@
-:root {
-    --DayPanel-width: 14rem;
-}
-
 .DayPanel {
     height: 40em;
-    width: var(--DayPanel-width);
-    margin-left: 4em;
-    margin-block: 5em;
+    width: 40%;
+    min-width: 14rem;
+    margin-left: 3em;
+    margin-top: 5em;
     border: 0.25rem solid black;
     overflow: scroll;
     position: relative;
@@ -56,4 +53,15 @@
 
 .event-column {
     border-radius: 0.6em;
+}
+
+.expanded-event-column {
+    height: 100%;
+    width: 20em;
+    position: relative;
+    z-index: 100;
+}
+
+.expanded-event-column h1 {
+    margin: 0;
 }

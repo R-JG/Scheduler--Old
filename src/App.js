@@ -19,18 +19,13 @@ export default function App() {
     const [ timeSelectMode, setTimeSelectMode ] = useState(
         {eventStart: false, eventEnd: false}
     );
+    const [ createEventMode, setCreateEventMode ] = useState(false);
 
     function generateDates(year, month) {
         const dateArray = [];
         const dayMonthBegins = new Date(year, month, 1).getDay();
         for (let i = 0; i < 42; i++) {
             let dayValue = i - dayMonthBegins + 1;
-            // note: this code below was added originally because I thought that using 0 as the date argument returned the last date of the month, but this turned out to actually just skip over the last day of the previous month.
-            /*
-            if (i >= dayMonthBegins) {
-                dayValue++;
-            };
-            */
             dateArray.push(new Date(year, month, dayValue));
         };
         return dateArray;
@@ -90,15 +85,23 @@ export default function App() {
 
     return (
         <main className='App'>
+            {!createEventMode && 
+            <button
+                className='button--create-event'
+                onClick={() => setCreateEventMode(true)}>
+                Create Event
+            </button>}
+            {createEventMode &&
             <EventPanel 
                 events={events}
                 eventFormData={eventFormData}
                 timeSelectMode={timeSelectMode}
                 setTimeSelectMode={setTimeSelectMode}
+                setCreateEventMode={setCreateEventMode}
                 setEventFormData={setEventFormData}
                 addNewEvent={addNewEvent}
                 updateEventFormValue={updateEventFormValue}
-            />
+            />}
             <Calendar 
                 currentDate={currentDate}
                 calendarDates={calendarDates}
