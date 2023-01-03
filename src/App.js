@@ -78,6 +78,17 @@ export default function App() {
         ]);
     };
 
+    function deleteEvent(eventToDelete) {
+        const eventIndex = events.findIndex((event) => (
+            event.id === eventToDelete.id
+        ));
+        setEvents((prevEvents) => {
+            const newEvents = [...prevEvents]
+            newEvents.splice(eventIndex, 1);
+            return newEvents;
+        });
+    };
+
     function getRandomHSLColor() {
         const randomNumber = Math.floor(Math.random() * 361);
         return `${randomNumber}, 100%, 50%`;
@@ -88,7 +99,8 @@ export default function App() {
             {!createEventMode && 
             <button
                 className='button--create-event'
-                onClick={() => setCreateEventMode(true)}>
+                onClick={() => setCreateEventMode(true)}
+            >
                 Create Event
             </button>}
             {createEventMode &&
@@ -117,6 +129,7 @@ export default function App() {
                 currentDate={currentDate}
                 selection={selection}
                 events={events}
+                deleteEvent={deleteEvent}
             />
         </main>
     );

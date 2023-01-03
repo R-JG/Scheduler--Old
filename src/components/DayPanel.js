@@ -7,7 +7,8 @@ export default function DayPanel(props) {
         calendarDates,
         currentDate,
         selection,
-        events
+        events,
+        deleteEvent
     } = props;
 
     const dayPanelRef = useRef(null);
@@ -76,6 +77,7 @@ export default function DayPanel(props) {
         )
     );
 
+    // refactor this to be a separate component:
     const eventColumnElements = (() => {
         let eventOverlapRecord = [];
         const elementArray = events.reduce((accumulator, currentEvent) => {
@@ -126,6 +128,12 @@ export default function DayPanel(props) {
                             className='expanded-event-column'
                             style={{backgroundColor: `hsl(${currentEvent.color})`}}
                             >
+                                <button 
+                                    className='button--delete-event'
+                                    onClick={() => deleteEvent(currentEvent)}
+                                >
+                                    Delete Event
+                                </button>
                                 <h1>{currentEvent.title}</h1>
                                 <p>{currentEvent.description}</p>
                         </div>}

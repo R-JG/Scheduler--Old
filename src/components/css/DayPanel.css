@@ -58,10 +58,18 @@
 .expanded-event-column {
     height: 100%;
     width: 20em;
+    padding: 1em;
+    border-radius: 0.6em;
     position: relative;
     z-index: 100;
+    display: flex;
+    flex-direction: column;
 }
 
 .expanded-event-column h1 {
     margin: 0;
+}
+
+.button--delete-event {
+    align-self: flex-end;
 }

@@ -67,6 +67,11 @@ export default function EventPanel(props) {
 
     return (
         <div className='EventPanel'>
+            <button 
+                className='button--cancel-event-creation'
+                onClick={closeCreateEvent}>
+                ✕
+            </button>
             <form 
                 className='event-form'
                 onSubmit={handleSubmit}
@@ -130,11 +135,6 @@ export default function EventPanel(props) {
                 <h3>Upcoming Events:</h3>
                 {eventList}
             </div>
-            <button 
-                className='button--cancel-create-event'
-                onClick={closeCreateEvent}>
-                X
-            </button>
         </div>
     );
 };

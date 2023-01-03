@@ -29,6 +29,11 @@
     width: 8em;
 }
 
+.button--cancel-event-creation {
+    margin: 0.5em;
+    align-self: flex-end;
+}
+
 .temp-event {
     margin-block: 2em;
 }
