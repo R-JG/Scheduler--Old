@@ -72,6 +72,9 @@ export default function DayPanel(props) {
                 key={date.toDateString()}
                 className='full-day-hour-block'
             >
+                <div className='date-separator'>
+                    {date.toDateString()}
+                </div>
                 {hoursOfDayElementArrayFactory()}
             </div>
         )
