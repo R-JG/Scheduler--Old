@@ -54,6 +54,12 @@ export default function DayPanel(props) {
         return `${hour}:00 AM`;
     };
 
+    function renderAsSubsidiaryMonth(date) {
+        return (date.getMonth() !== calendarDates[10].getMonth())
+            ? 'subsidiary-month'
+            : '';
+    };
+
     const hoursOfDayElementArrayFactory = () => Array.from(
         {length: 24}, 
         (value, index) => {
@@ -70,7 +76,10 @@ export default function DayPanel(props) {
         (date) => (
             <div 
                 key={date.toDateString()}
-                className='full-day-hour-block'
+                className={
+                    `full-day-hour-block 
+                     ${renderAsSubsidiaryMonth(date)}`
+                }
             >
                 <div className='date-separator'>
                     {date.toDateString()}

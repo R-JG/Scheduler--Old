@@ -35,9 +35,9 @@ export default function CalendarDate(props) {
             : '';
     };
 
-    function renderAsCurrentMonth() {
+    function renderAsSubsidiaryMonth() {
         return (date.getMonth() !== calendarDates[10].getMonth())
-            ? 'not-current-month'
+            ? 'subsidiary-month'
             : '';
     };
 
@@ -64,7 +64,7 @@ export default function CalendarDate(props) {
                 `CalendarDate
                  ${renderAsSelectedDate()}
                  ${renderAsCurrentDate()}
-                 ${renderAsCurrentMonth()}
+                 ${renderAsSubsidiaryMonth()}
                  ${renderAsFormDateSelection()}`
             }
             onMouseDown={handleMouseDown}
