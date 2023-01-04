@@ -1,0 +1,33 @@
+.events-container--day-panel {
+    width: 100%;
+    position: absolute;
+    display: grid;
+    grid-template-columns: 5em;
+    grid-auto-columns: 1.5em;
+    grid-template-rows: repeat(calc(42 * 24), var(--hour-height));
+    column-gap: 1em;
+}
+
+.event-column {
+    border-radius: 0.6em;
+}
+
+.expanded-event-column {
+    height: 100%;
+    width: 20em;
+    padding: 1em;
+    border-radius: 0.6em;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+}
+
+.expanded-event-column h1 {
+    margin: 0;
+}
+
+.button--delete-event {
+    align-self: flex-end;
+}

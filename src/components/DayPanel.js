@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
+import DayPanelEvent from './DayPanelEvent';
 import './css/DayPanel.css';
 
 export default function DayPanel(props) {
@@ -89,8 +90,7 @@ export default function DayPanel(props) {
         )
     );
 
-    // refactor this to be a separate component:
-    const eventColumnElements = (() => {
+    const eventElements = (() => {
         let eventOverlapRecord = [];
         const elementArray = events.reduce((accumulator, currentEvent) => {
             if ((currentEvent.end.valueOf() <= calendarDates[0].valueOf()) 
@@ -129,27 +129,13 @@ export default function DayPanel(props) {
                 backgroundColor: `hsl(${currentEvent.color})`
             };
             accumulator.push(
-                <div 
+                <DayPanelEvent 
                     key={'DayPanel' + currentEvent.id}
-                    className='event-column'
-                    style={gridItemStyle}
-                    >
-                        {(currentEvent.id === selection.value.id) 
-                        && 
-                        <div 
-                            className='expanded-event-column'
-                            style={{backgroundColor: `hsl(${currentEvent.color})`}}
-                            >
-                                <button 
-                                    className='button--delete-event'
-                                    onClick={() => deleteEvent(currentEvent)}
-                                >
-                                    Delete Event
-                                </button>
-                                <h1>{currentEvent.title}</h1>
-                                <p>{currentEvent.description}</p>
-                        </div>}
-                </div>
+                    event={currentEvent}
+                    gridItemStyle={gridItemStyle}
+                    selection={selection}
+                    deleteEvent={deleteEvent}
+                />
             );
             return accumulator;
         }, []);
@@ -159,7 +145,7 @@ export default function DayPanel(props) {
     return (
         <div ref={dayPanelRef} className='DayPanel'>
             <div className='events-container--day-panel'>
-                {eventColumnElements}
+                {eventElements}
             </div>
             {dailyHourBlockElements}
         </div>
