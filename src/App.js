@@ -20,6 +20,7 @@ export default function App() {
         {eventStart: false, eventEnd: false}
     );
     const [ createEventMode, setCreateEventMode ] = useState(false);
+    const [ editEventMode, setEditEventMode ] = useState(false);
 
     function generateDates(year, month) {
         const dateArray = [];
@@ -66,6 +67,12 @@ export default function App() {
             setTimeSelectMode({eventStart: false, eventEnd: true});
     };
 
+    function clearEventFormData() {
+        setEventFormData(
+            {start: '', end: '', title: '', description: ''}
+        );
+    };
+
     function addNewEvent() {
         const newEvent = {
             ...eventFormData,
@@ -78,6 +85,24 @@ export default function App() {
         ]);
     };
 
+    function stageEventEdit(eventToEdit) {
+        setEventFormData({...eventToEdit});
+        setEditEventMode(true);
+    };
+
+    function editEvent(eventToEdit) {
+        const eventIndex = events.findIndex((event) => (
+            event.id === eventToEdit.id
+        ));
+        setEvents((prevEvents) => {
+            const newEvents = [...prevEvents]
+            newEvents.splice(eventIndex, 1, eventFormData);
+            return newEvents;
+        });
+        clearEventFormData();
+        setEditEventMode(false);
+    };
+
     function deleteEvent(eventToDelete) {
         const eventIndex = events.findIndex((event) => (
             event.id === eventToDelete.id
@@ -87,6 +112,10 @@ export default function App() {
             newEvents.splice(eventIndex, 1);
             return newEvents;
         });
+        if (editEventMode) {
+            clearEventFormData();
+            setEditEventMode(false);
+        };
     };
 
     function getRandomHSLColor() {
@@ -110,7 +139,7 @@ export default function App() {
                 timeSelectMode={timeSelectMode}
                 setTimeSelectMode={setTimeSelectMode}
                 setCreateEventMode={setCreateEventMode}
-                setEventFormData={setEventFormData}
+                clearEventFormData={clearEventFormData}
                 addNewEvent={addNewEvent}
                 updateEventFormValue={updateEventFormValue}
             />}
@@ -129,6 +158,9 @@ export default function App() {
                 currentDate={currentDate}
                 selection={selection}
                 events={events}
+                editEventMode={editEventMode}
+                stageEventEdit={stageEventEdit}
+                editEvent={editEvent}
                 deleteEvent={deleteEvent}
             />
         </main>

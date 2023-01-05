@@ -9,6 +9,9 @@ export default function DayPanel(props) {
         currentDate,
         selection,
         events,
+        editEventMode,
+        stageEventEdit,
+        editEvent,
         deleteEvent
     } = props;
 
@@ -134,6 +137,9 @@ export default function DayPanel(props) {
                     event={currentEvent}
                     gridItemStyle={gridItemStyle}
                     selection={selection}
+                    editEventMode={editEventMode}
+                    stageEventEdit={stageEventEdit}
+                    editEvent={editEvent}
                     deleteEvent={deleteEvent}
                 />
             );

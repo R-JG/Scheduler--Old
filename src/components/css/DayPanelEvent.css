@@ -28,6 +28,14 @@
     margin: 0;
 }
 
+.button--edit-event {
+    align-self: flex-end;
+}
+
+.button--confirm-edit {
+    align-self: flex-end;
+}
+
 .button--delete-event {
     align-self: flex-end;
 }

@@ -9,15 +9,13 @@ export default function EventPanel(props) {
         timeSelectMode,
         setTimeSelectMode,
         setCreateEventMode,
-        setEventFormData,
+        clearEventFormData,
         addNewEvent,
         updateEventFormValue 
     } = props;
 
     function closeCreateEvent() {
-        setEventFormData(
-            {start: '', end: '', title: '', description: ''}
-        );
+        clearEventFormData();
         setTimeSelectMode(
             {eventStart: false, eventEnd: false}
         );
