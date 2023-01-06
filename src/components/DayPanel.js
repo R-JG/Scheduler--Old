@@ -8,11 +8,16 @@ export default function DayPanel(props) {
         calendarDates,
         currentDate,
         selection,
+        eventFormData,
         events,
         editEventMode,
+        timeSelectMode,
+        setTimeSelectMode,
         stageEventEdit,
+        endEventEdit,
         editEvent,
-        deleteEvent
+        deleteEvent,
+        updateEventFormValue
     } = props;
 
     const dayPanelRef = useRef(null);
@@ -22,7 +27,8 @@ export default function DayPanel(props) {
     }, []);
 
     useEffect(() => {
-        if (selection.type === 'date') {
+        if ((selection.type === 'date') 
+        && (editEventMode === false)) {
             scrollToDate(selection.value);
         };
         if (selection.type === 'event') {
@@ -137,10 +143,15 @@ export default function DayPanel(props) {
                     event={currentEvent}
                     gridItemStyle={gridItemStyle}
                     selection={selection}
+                    eventFormData={eventFormData}
                     editEventMode={editEventMode}
+                    timeSelectMode={timeSelectMode}
+                    setTimeSelectMode={setTimeSelectMode}
                     stageEventEdit={stageEventEdit}
+                    endEventEdit={endEventEdit}
                     editEvent={editEvent}
                     deleteEvent={deleteEvent}
+                    updateEventFormValue={updateEventFormValue}
                 />
             );
             return accumulator;

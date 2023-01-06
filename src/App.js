@@ -90,6 +90,12 @@ export default function App() {
         setEditEventMode(true);
     };
 
+    function endEventEdit() {
+        clearEventFormData();
+        setTimeSelectMode({eventStart: false, eventEnd: false});
+        setEditEventMode(false);
+    };
+
     function editEvent(eventToEdit) {
         const eventIndex = events.findIndex((event) => (
             event.id === eventToEdit.id
@@ -99,8 +105,7 @@ export default function App() {
             newEvents.splice(eventIndex, 1, eventFormData);
             return newEvents;
         });
-        clearEventFormData();
-        setEditEventMode(false);
+        endEventEdit();
     };
 
     function deleteEvent(eventToDelete) {
@@ -113,8 +118,7 @@ export default function App() {
             return newEvents;
         });
         if (editEventMode) {
-            clearEventFormData();
-            setEditEventMode(false);
+            endEventEdit();
         };
     };
 
@@ -125,7 +129,7 @@ export default function App() {
 
     return (
         <main className='App'>
-            {!createEventMode && 
+            {(!createEventMode && !editEventMode) && 
             <button
                 className='button--create-event'
                 onClick={() => setCreateEventMode(true)}
@@ -157,11 +161,16 @@ export default function App() {
                 calendarDates={calendarDates}
                 currentDate={currentDate}
                 selection={selection}
+                eventFormData={eventFormData}
                 events={events}
                 editEventMode={editEventMode}
+                timeSelectMode={timeSelectMode}
+                setTimeSelectMode={setTimeSelectMode}
                 stageEventEdit={stageEventEdit}
+                endEventEdit={endEventEdit}
                 editEvent={editEvent}
                 deleteEvent={deleteEvent}
+                updateEventFormValue={updateEventFormValue}
             />
         </main>
     );

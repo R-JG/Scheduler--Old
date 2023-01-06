@@ -24,11 +24,17 @@
     flex-direction: column;
 }
 
+.expanded-event-column--edit-mode {}
+
 .expanded-event-column h1 {
     margin: 0;
 }
 
 .button--edit-event {
+    align-self: flex-end;
+}
+
+.button--cancel-edit {
     align-self: flex-end;
 }
 
@@ -39,3 +45,7 @@
 .button--delete-event {
     align-self: flex-end;
 }
+
+.button--set-start-time--DayPanel {}
+
+.button--set-end-time--DayPanel {}
