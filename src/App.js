@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Calendar from './components/Calendar';
-import EventPanel from './components/EventPanel';
+import EventCreationPanel from './components/EventCreationPanel';
 import DayPanel from './components/DayPanel';
 import './App.css';
 import { nanoid } from 'nanoid';
@@ -151,7 +151,7 @@ export default function App() {
                     </button>
                 </div>}
                 {createEventMode &&
-                <EventPanel 
+                <EventCreationPanel 
                     events={events}
                     eventFormData={eventFormData}
                     timeSelectMode={timeSelectMode}

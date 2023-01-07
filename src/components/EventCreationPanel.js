@@ -1,7 +1,7 @@
 import React from 'react';
-import './css/EventPanel.css';
+import './css/EventCreationPanel.css';
 
-export default function EventPanel(props) {
+export default function EventCreationPanel(props) {
 
     const { 
         events, 
@@ -66,7 +66,7 @@ export default function EventPanel(props) {
     */
 
     return (
-        <div className='EventPanel'>
+        <div className='EventCreationPanel'>
             <button 
                 className='button--cancel-event-creation'
                 onClick={closeCreateEvent}>
