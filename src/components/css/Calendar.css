@@ -1,4 +1,9 @@
+.Calendar {
+    margin-inline: 1em;
+}
+
 .calendar-header {
+    height: 5rem;
     width: 40rem;
     display: flex;
     flex-direction: row;

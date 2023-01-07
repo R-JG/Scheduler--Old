@@ -51,6 +51,7 @@ export default function EventPanel(props) {
         }));
     };
 
+    /*
     const eventList = events.map((event) => (
         <div className='temp-event' key={event.id}>
             <div 
@@ -61,7 +62,8 @@ export default function EventPanel(props) {
             <div>{`From ${event.start.toDateString()}`}</div>
             <div>{`To ${event.end.toDateString()}`}</div>
         </div>
-    ))
+    ));
+    */
 
     return (
         <div className='EventPanel'>
@@ -71,33 +73,39 @@ export default function EventPanel(props) {
                 ✕
             </button>
             <form 
-                className='event-form'
+                className='event-creation-form'
                 onSubmit={handleSubmit}
             >
                 <button className='button--add-event'>
                     Add Event
                 </button>
-                <label htmlFor='event-form--title'>
+                <label 
+                    className='event-creation-title-label'
+                    htmlFor='event-creation-form--title'>
                     Title:
                 </label>
                 <input 
-                    id='event-form--title'
+                    id='event-creation-form--title'
                     type='text' 
                     name='title'
                     value={eventFormData.title}
                     onChange={handleChange}
                 />
-                <label htmlFor='event-form--description'>
+                <label 
+                    className='event-creation-description-label'
+                    htmlFor='event-creation-form--description'>
                     Description:
                 </label>
                 <textarea 
-                    id='event-form--description'
+                    id='event-creation-form--description'
                     name='description'
                     value={eventFormData.description} 
                     onChange={handleChange}
                 />
-                <div>
-                    <p>Start: </p>
+                <p className='event-creation-start-label'>
+                    Start: 
+                </p>
+                <div className='event-creation-form--start'>
                     <p>
                         {(typeof eventFormData.start === 'object') 
                             ? eventFormData.start.toDateString() 
@@ -112,8 +120,10 @@ export default function EventPanel(props) {
                         {(timeSelectMode.eventStart) ? '✓' : 'Set Start Time'}
                     </button>
                 </div>
-                <div>
-                    <p>End: </p>
+                <p className='event-creation-end-label'>
+                    End: 
+                </p>
+                <div className='event-creation-form--end'>
                     <p>
                         {(typeof eventFormData.end === 'object') 
                             ? eventFormData.end.toDateString() 
@@ -129,10 +139,6 @@ export default function EventPanel(props) {
                     </button>
                 </div>                
             </form>
-            <div className='upcoming-events'>
-                <h3>Upcoming Events:</h3>
-                {eventList}
-            </div>
         </div>
     );
 };

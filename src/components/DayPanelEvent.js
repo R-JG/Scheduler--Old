@@ -61,8 +61,12 @@ export default function DayPanelEvent(props) {
                             >
                                 ⛭
                             </button>
-                            <h1>{event.title}</h1>
-                            <p>{event.description}</p>
+                            <h1 className='event-column-title'>
+                                {event.title}
+                            </h1>
+                            <p className='event-column-description'>
+                                {event.description}
+                            </p>
                         </div>
                     );
                 };

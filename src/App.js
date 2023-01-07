@@ -86,6 +86,7 @@ export default function App() {
     };
 
     function stageEventEdit(eventToEdit) {
+        if (createEventMode) return;
         setEventFormData({...eventToEdit});
         setEditEventMode(true);
     };
@@ -129,24 +130,6 @@ export default function App() {
 
     return (
         <main className='App'>
-            {(!createEventMode && !editEventMode) && 
-            <button
-                className='button--create-event'
-                onClick={() => setCreateEventMode(true)}
-            >
-                Create Event
-            </button>}
-            {createEventMode &&
-            <EventPanel 
-                events={events}
-                eventFormData={eventFormData}
-                timeSelectMode={timeSelectMode}
-                setTimeSelectMode={setTimeSelectMode}
-                setCreateEventMode={setCreateEventMode}
-                clearEventFormData={clearEventFormData}
-                addNewEvent={addNewEvent}
-                updateEventFormValue={updateEventFormValue}
-            />}
             <Calendar 
                 currentDate={currentDate}
                 calendarDates={calendarDates}
@@ -157,21 +140,43 @@ export default function App() {
                 updateSelection={updateSelection}
                 updateEventFormTimes={updateEventFormTimes}
             />
-            <DayPanel 
-                calendarDates={calendarDates}
-                currentDate={currentDate}
-                selection={selection}
-                eventFormData={eventFormData}
-                events={events}
-                editEventMode={editEventMode}
-                timeSelectMode={timeSelectMode}
-                setTimeSelectMode={setTimeSelectMode}
-                stageEventEdit={stageEventEdit}
-                endEventEdit={endEventEdit}
-                editEvent={editEvent}
-                deleteEvent={deleteEvent}
-                updateEventFormValue={updateEventFormValue}
-            />
+            <div className='main--second-section'>
+                {!createEventMode && 
+                <div className='second-section-header'>
+                    <button
+                        className='button--create-event'
+                        onClick={() => (!editEventMode) ? setCreateEventMode(true) : undefined}
+                    >
+                        Create Event
+                    </button>
+                </div>}
+                {createEventMode &&
+                <EventPanel 
+                    events={events}
+                    eventFormData={eventFormData}
+                    timeSelectMode={timeSelectMode}
+                    setTimeSelectMode={setTimeSelectMode}
+                    setCreateEventMode={setCreateEventMode}
+                    clearEventFormData={clearEventFormData}
+                    addNewEvent={addNewEvent}
+                    updateEventFormValue={updateEventFormValue}
+                />}
+                <DayPanel 
+                    calendarDates={calendarDates}
+                    currentDate={currentDate}
+                    selection={selection}
+                    eventFormData={eventFormData}
+                    events={events}
+                    editEventMode={editEventMode}
+                    timeSelectMode={timeSelectMode}
+                    setTimeSelectMode={setTimeSelectMode}
+                    stageEventEdit={stageEventEdit}
+                    endEventEdit={endEventEdit}
+                    editEvent={editEvent}
+                    deleteEvent={deleteEvent}
+                    updateEventFormValue={updateEventFormValue}
+                />
+            </div>
         </main>
     );
 };

@@ -3,11 +3,10 @@
 }
 
 .DayPanel {
-    height: 40em;
-    width: 40%;
-    min-width: 14rem;
-    margin-left: 3em;
-    margin-top: 5em;
+    max-height: 40rem;
+    width: 40rem;
+    margin-inline: 1em;
+    margin-bottom: 2.5em;
     border: 0.25rem solid black;
     overflow: scroll;
     position: relative;
