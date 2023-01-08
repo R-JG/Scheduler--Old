@@ -52,8 +52,10 @@ export default function DayPanel(props) {
 
     function scrollToEvent(eventObject) {
         if (typeof eventObject !== 'object') return;
-        const dateIndex = getCalendarDateIndex(eventObject.start);
-        dayPanelRef.current.children[dateIndex + 1].scrollIntoView(
+        const eventIndex = events.findIndex((eventItem) => (
+            eventItem.id === eventObject.id
+        ));
+        dayPanelRef.current.children[0].children[eventIndex].scrollIntoView(
             {behavior: 'smooth', block: 'start'}
         );
     };
