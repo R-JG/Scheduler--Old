@@ -115,7 +115,10 @@ export default function DayPanel(props) {
         )
     );
 
-    const eventElements = (() => {
+    // IIFE that returns an array of event components with properties for grid row to position
+    // them vertically according to their start and end time, and for grid column to position them
+    // horizontally, stacked from the left according to whether or not the event would overlap with another.
+    const eventComponents = (() => {
         let eventOverlapRecord = [];
         const elementArray = events.reduce((accumulator, currentEvent) => {
             if ((currentEvent.end.valueOf() <= calendarDates[0].valueOf()) 
@@ -126,8 +129,8 @@ export default function DayPanel(props) {
             let endDateIndex = getCalendarDateIndex(currentEvent.end);
             if (startDateIndex === -1) startDateIndex = 0;
             if (endDateIndex === -1) endDateIndex = 41;
-            const gridRowStart = (startDateIndex * 24) + 1;
-            const gridRowEnd = ((endDateIndex + 1) * 24) + 1;
+            const gridRowStart = (startDateIndex * 24) + (currentEvent.start.getHours() + 1);
+            const gridRowEnd = (endDateIndex * 24) + (currentEvent.end.getHours() + 2);
             let gridColumnStart;
             for (let i = 2; i <= (events.length + 1); i++) {
                 const isOverlapping = eventOverlapRecord.some((event) => {
@@ -181,7 +184,7 @@ export default function DayPanel(props) {
             className='DayPanel'
             onClick={delegateClickForHourSelection}>
             <div className='events-container--day-panel'>
-                {eventElements}
+                {eventComponents}
             </div>
             {dailyHourBlockElements}
         </div>

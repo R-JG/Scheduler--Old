@@ -52,8 +52,9 @@ export default function CalendarDate(props) {
     };
     
     // note: first condition checks whether the date is equal to the start date of the event,
-    // the second condition checks this for the event end, and the third checks for whether
-    // the date falls in between.
+    // the second condition after the disjunction checks this for the event end, 
+    // and the third checks for whether the date falls in between.
+    // The first two conditions are conjunctions beginning with a type check to avoid a crash.
     function renderAsFormDateSelection() {
         if (((typeof eventFormData.start === 'object') 
             && (date.toDateString() === eventFormData.start.toDateString()))
