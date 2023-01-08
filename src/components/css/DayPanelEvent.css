@@ -1,15 +1,6 @@
-.events-container--day-panel {
-    width: 100%;
-    position: absolute;
-    display: grid;
-    grid-template-columns: 5em;
-    grid-auto-columns: 1.5em;
-    grid-template-rows: repeat(calc(42 * 24), var(--hour-height));
-    column-gap: 1em;
-}
-
 .event-column {
     border-radius: 0.6em;
+    pointer-events: all;
 }
 
 .expanded-event-column {
@@ -51,7 +42,3 @@
 .button--delete-event {
     align-self: flex-end;
 }
-
-.button--set-start-time--DayPanel {}
-
-.button--set-end-time--DayPanel {}

@@ -17,7 +17,8 @@ export default function DayPanel(props) {
         endEventEdit,
         editEvent,
         deleteEvent,
-        updateEventFormValue
+        updateEventFormValue,
+        updateEventFormTimes
     } = props;
 
     const dayPanelRef = useRef(null);
@@ -57,6 +58,18 @@ export default function DayPanel(props) {
         );
     };
 
+    function delegateClickForHourSelection(e) {
+        if (!timeSelectMode.eventStart 
+            && !timeSelectMode.eventEnd) return;
+        if (!(e.target.classList.contains('hour'))) return;
+        const idArray = e.target.id.split(' ');
+        const hourValue = idArray.pop();
+        const dateValue = idArray.join(' ');
+        const nextDate = new Date(dateValue)
+        nextDate.setHours(hourValue);
+        updateEventFormTimes(nextDate);
+    };
+
     function convertHourFormat(hour) {
         if (hour === 0) return '12:00 AM';
         if (hour === 12) return '12:00 PM';
@@ -70,11 +83,15 @@ export default function DayPanel(props) {
             : '';
     };
 
-    const hoursOfDayElementArrayFactory = () => Array.from(
+    const hoursOfDayElementArrayFactory = (date) => Array.from(
         {length: 24}, 
         (value, index) => {
+            const id = `${date.toDateString()} ${index}`
             return (
-            <div key={index} className='hour'>
+            <div 
+                key={id} 
+                className='hour'
+                id={id}>
                 <div className='hour-text'>
                     {convertHourFormat(index)}
                 </div>
@@ -88,13 +105,12 @@ export default function DayPanel(props) {
                 key={date.toDateString()}
                 className={
                     `full-day-hour-block 
-                     ${renderAsSubsidiaryMonth(date)}`
-                }
+                     ${renderAsSubsidiaryMonth(date)}`}
             >
                 <div className='date-separator'>
                     {date.toDateString()}
                 </div>
-                {hoursOfDayElementArrayFactory()}
+                {hoursOfDayElementArrayFactory(date)}
             </div>
         )
     );
@@ -160,7 +176,10 @@ export default function DayPanel(props) {
     })();
 
     return (
-        <div ref={dayPanelRef} className='DayPanel'>
+        <div 
+            ref={dayPanelRef} 
+            className='DayPanel'
+            onClick={delegateClickForHourSelection}>
             <div className='events-container--day-panel'>
                 {eventElements}
             </div>

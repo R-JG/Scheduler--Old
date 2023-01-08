@@ -136,6 +136,7 @@ export default function App() {
                 selection={selection}
                 events={events}
                 eventFormData={eventFormData}
+                timeSelectMode={timeSelectMode}
                 changeMonth={changeMonth}
                 updateSelection={updateSelection}
                 updateEventFormTimes={updateEventFormTimes}
@@ -175,6 +176,7 @@ export default function App() {
                     editEvent={editEvent}
                     deleteEvent={deleteEvent}
                     updateEventFormValue={updateEventFormValue}
+                    updateEventFormTimes={updateEventFormTimes}
                 />
             </div>
         </main>
