@@ -19,8 +19,9 @@ export default function CalendarDate(props) {
     // it is set to the end of the given date, as that would be the assumption in
     // selecting a date as an end.  
     function updateEventFormTimesFromCalendar() {
-        if (timeSelectMode.eventEnd) date.setHours(23, 59, 59, 999);
-        updateEventFormTimes(date);
+        let nextDate = new Date(date);
+        if (timeSelectMode.eventEnd) nextDate.setHours(23, 59, 59, 999);
+        updateEventFormTimes(nextDate);
     };
 
     function handleMouseDown() {

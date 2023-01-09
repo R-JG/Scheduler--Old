@@ -65,7 +65,7 @@ export default function DayPanel(props) {
             && !timeSelectMode.eventEnd) return;
         if (!(e.target.classList.contains('hour'))) return;
         const idArray = e.target.id.split(' ');
-        const hourValue = idArray.pop();
+        let hourValue = idArray.pop();
         const dateValue = idArray.join(' ');
         const nextDate = new Date(dateValue)
         nextDate.setHours(hourValue);
@@ -84,6 +84,8 @@ export default function DayPanel(props) {
             ? 'subsidiary-month'
             : '';
     };
+
+    function renderFormSelectionMarker() {};
 
     const hoursOfDayElementArrayFactory = (date) => Array.from(
         {length: 24}, 
@@ -117,6 +119,16 @@ export default function DayPanel(props) {
         )
     );
 
+    function determineGridRowCoordinates(event) {
+        let startDateIndex = getCalendarDateIndex(event.start);
+        let endDateIndex = getCalendarDateIndex(event.end);
+        if (startDateIndex === -1) startDateIndex = 0;
+        if (endDateIndex === -1) endDateIndex = 41;
+        const gridRowStart = (startDateIndex * 24) + (event.start.getHours() + 1);
+        const gridRowEnd = (endDateIndex * 24) + (event.end.getHours() + 2);
+        return {gridRowStart, gridRowEnd};
+    };
+
     // IIFE that returns an array of event components with properties for grid row to position
     // them vertically according to their start and end time, and for grid column to position them
     // horizontally, stacked from the left according to whether or not the event would overlap with another.
@@ -127,12 +139,7 @@ export default function DayPanel(props) {
             || (currentEvent.start.valueOf() >= calendarDates[41].valueOf())) {
                 return accumulator;
             };
-            let startDateIndex = getCalendarDateIndex(currentEvent.start);
-            let endDateIndex = getCalendarDateIndex(currentEvent.end);
-            if (startDateIndex === -1) startDateIndex = 0;
-            if (endDateIndex === -1) endDateIndex = 41;
-            const gridRowStart = (startDateIndex * 24) + (currentEvent.start.getHours() + 1);
-            const gridRowEnd = (endDateIndex * 24) + (currentEvent.end.getHours() + 2);
+            const { gridRowStart, gridRowEnd } = determineGridRowCoordinates(currentEvent);
             let gridColumnStart;
             for (let i = 2; i <= (events.length + 1); i++) {
                 const isOverlapping = eventOverlapRecord.some((event) => {

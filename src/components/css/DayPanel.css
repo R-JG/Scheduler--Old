@@ -55,3 +55,14 @@
     column-gap: 1em;
     pointer-events: none;
 }
+
+.form-selection-container {
+    width: 100%;
+    position: absolute;
+    display: grid;
+    grid-template-columns: 5em;
+    grid-auto-columns: 1.5em;
+    grid-template-rows: repeat(calc(42 * 24), var(--hour-height));
+    column-gap: 1em;
+    pointer-events: none;
+}

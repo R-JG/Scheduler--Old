@@ -46,6 +46,15 @@ export default function DayPanelEvent(props) {
         }));
     };
 
+    function processDateString(dateObject) {
+        const timeString = dateObject.toLocaleTimeString();
+        const processedTimeString = (
+            timeString.substring(0, (timeString.length - 6)) 
+            + timeString.substring((timeString.length - 3), timeString.length)
+        );
+        return dateObject.toDateString() + ', ' + processedTimeString;
+    };
+
     function renderExpandedEvent() {
         switch (editEventMode) {
             case false:
@@ -64,6 +73,14 @@ export default function DayPanelEvent(props) {
                             <h1 className='event-column-title'>
                                 {event.title}
                             </h1>
+                            <div className='event-column-start'>
+                                <p>From: </p>
+                                {processDateString(event.start)}
+                            </div>
+                            <div className='event-column-end'>
+                                <p>To: </p>
+                                {processDateString(event.end)}
+                            </div>
                             <p className='event-column-description'>
                                 {event.description}
                             </p>
