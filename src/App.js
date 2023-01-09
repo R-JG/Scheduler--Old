@@ -177,6 +177,7 @@ export default function App() {
                     deleteEvent={deleteEvent}
                     updateEventFormValue={updateEventFormValue}
                     updateEventFormTimes={updateEventFormTimes}
+                    updateSelection={updateSelection}
                 />
             </div>
         </main>

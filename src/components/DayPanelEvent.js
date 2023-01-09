@@ -15,10 +15,17 @@ export default function DayPanelEvent(props) {
         endEventEdit,
         editEvent,
         deleteEvent,
-        updateEventFormValue
+        updateEventFormValue,
+        updateSelection
     } = props;
 
-    function handleSubmit(e) {
+    function handleEventClick() {
+        if ((selection.type === 'event') 
+        && (selection.value.id === event.id)) return;
+        updateSelection('event', event);
+    };
+
+    function handleFormSubmit(e) {
         e.preventDefault();
         if (
             (eventFormData.start === '') 
@@ -28,12 +35,12 @@ export default function DayPanelEvent(props) {
         editEvent(event);
     };
 
-    function handleChange(e) {
+    function handleFormChange(e) {
         const { name, value } = e.target;
         updateEventFormValue(name, value);
     };
 
-    function handleSetTimeButtons(e) {
+    function handleFormTimeButtons(e) {
         if (e.target.name === 'start')
         setTimeSelectMode((prevState) => ({
             eventStart: !prevState.eventStart,
@@ -55,7 +62,7 @@ export default function DayPanelEvent(props) {
         return dateObject.toDateString() + ', ' + processedTimeString;
     };
 
-    function renderExpandedEvent() {
+    function ExpandedEvent() {
         switch (editEventMode) {
             case false:
                 if (event.id === selection.value.id) {
@@ -109,7 +116,7 @@ export default function DayPanelEvent(props) {
                                 Delete Event
                             </button>
                             <form
-                                onSubmit={handleSubmit}
+                                onSubmit={handleFormSubmit}
                             >
                                 <button className='button--confirm-edit'>
                                     Confirm Edit
@@ -118,12 +125,12 @@ export default function DayPanelEvent(props) {
                                     type='text'
                                     name='title'
                                     value={eventFormData.title}
-                                    onChange={handleChange}
+                                    onChange={handleFormChange}
                                 />
                                 <textarea
                                     name='description'
                                     value={eventFormData.description}
-                                    onChange={handleChange}
+                                    onChange={handleFormChange}
                                 />
                                 <div>
                                     <p>Start: </p>
@@ -136,7 +143,7 @@ export default function DayPanelEvent(props) {
                                         name='start'
                                         className='button--set-start-time--DayPanel'
                                         type='button'
-                                        onClick={handleSetTimeButtons}
+                                        onClick={handleFormTimeButtons}
                                     >
                                         {(timeSelectMode.eventStart) ? '✓' : 'Set Start Time'}
                                     </button>
@@ -152,7 +159,7 @@ export default function DayPanelEvent(props) {
                                         name='end'
                                         className='button--set-end-time--DayPanel'
                                         type='button'
-                                        onClick={handleSetTimeButtons}
+                                        onClick={handleFormTimeButtons}
                                     >
                                         {(timeSelectMode.eventEnd) ? '✓' : 'Set End Time'}
                                     </button>
@@ -169,8 +176,9 @@ export default function DayPanelEvent(props) {
         <div 
             className='event-column'
             style={gridItemStyle}
+            onClick={handleEventClick}
             >
-                {renderExpandedEvent()}
+                {ExpandedEvent()}
         </div>
     );
 };

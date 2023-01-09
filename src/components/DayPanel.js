@@ -18,7 +18,8 @@ export default function DayPanel(props) {
         editEvent,
         deleteEvent,
         updateEventFormValue,
-        updateEventFormTimes
+        updateEventFormTimes,
+        updateSelection
     } = props;
 
     const dayPanelRef = useRef(null);
@@ -207,6 +208,7 @@ export default function DayPanel(props) {
                     editEvent={editEvent}
                     deleteEvent={deleteEvent}
                     updateEventFormValue={updateEventFormValue}
+                    updateSelection={updateSelection}
                 />
             );
             return accumulator;

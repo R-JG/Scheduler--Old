@@ -27,6 +27,23 @@
     word-wrap: break-word;
 }
 
+.event-column-start {
+    margin: 1em;
+}
+
+.event-column-start p {
+    margin: 0;
+}
+
+.event-column-end {
+    margin-inline: 1em;
+    margin-bottom: 0.5em;
+}
+
+.event-column-end p {
+    margin: 0;
+}
+
 .button--edit-event {
     align-self: flex-end;
 }
