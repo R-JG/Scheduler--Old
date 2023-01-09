@@ -56,13 +56,16 @@
     pointer-events: none;
 }
 
-.form-selection-container {
+.form-selection-container--day-panel {
     width: 100%;
     position: absolute;
     display: grid;
-    grid-template-columns: 5em;
-    grid-auto-columns: 1.5em;
+    grid-template-columns: 5em 1fr;
     grid-template-rows: repeat(calc(42 * 24), var(--hour-height));
-    column-gap: 1em;
     pointer-events: none;
+}
+
+.form-selection-marker--day-panel {
+    grid-column: 1 / 2;
+    background-color: rgba(128, 128, 128, 0.5);
 }

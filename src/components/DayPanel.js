@@ -45,7 +45,7 @@ export default function DayPanel(props) {
 
     function scrollToDate(dateObject) {
         const dateIndex = getCalendarDateIndex(dateObject);
-        dayPanelRef.current.children[dateIndex + 1].scrollIntoView(
+        dayPanelRef.current.children[2].children[dateIndex].scrollIntoView(
             {behavior: 'smooth', block: 'start'}
         );
     };
@@ -85,7 +85,31 @@ export default function DayPanel(props) {
             : '';
     };
 
-    function renderFormSelectionMarker() {};
+    function renderFormSelectionMarker() {
+        if ((typeof eventFormData.start != 'object') 
+        && (typeof eventFormData.end != 'object')) return;
+        let eventStart;
+        let eventEnd;
+        (typeof eventFormData.start === 'object') 
+        ? (eventStart = eventFormData.start) 
+        : (eventStart = eventFormData.end);
+        (typeof eventFormData.end === 'object') 
+        ? (eventEnd = eventFormData.end) 
+        : (eventEnd = eventFormData.start);
+        const { 
+            gridRowStart, 
+            gridRowEnd 
+        } = determineGridRowCoordinates(eventStart, eventEnd);
+        const gridItemStyle = {
+            gridRow: `${gridRowStart} / ${gridRowEnd}`,
+        };
+        return (
+            <div 
+                className='form-selection-marker--day-panel'
+                style={gridItemStyle}>
+            </div>
+        );
+    };
 
     const hoursOfDayElementArrayFactory = (date) => Array.from(
         {length: 24}, 
@@ -119,13 +143,13 @@ export default function DayPanel(props) {
         )
     );
 
-    function determineGridRowCoordinates(event) {
-        let startDateIndex = getCalendarDateIndex(event.start);
-        let endDateIndex = getCalendarDateIndex(event.end);
+    function determineGridRowCoordinates(eventStartDate, eventEndDate) {
+        let startDateIndex = getCalendarDateIndex(eventStartDate);
+        let endDateIndex = getCalendarDateIndex(eventEndDate);
         if (startDateIndex === -1) startDateIndex = 0;
         if (endDateIndex === -1) endDateIndex = 41;
-        const gridRowStart = (startDateIndex * 24) + (event.start.getHours() + 1);
-        const gridRowEnd = (endDateIndex * 24) + (event.end.getHours() + 2);
+        const gridRowStart = (startDateIndex * 24) + (eventStartDate.getHours() + 1);
+        const gridRowEnd = (endDateIndex * 24) + (eventEndDate.getHours() + 2);
         return {gridRowStart, gridRowEnd};
     };
 
@@ -139,7 +163,10 @@ export default function DayPanel(props) {
             || (currentEvent.start.valueOf() >= calendarDates[41].valueOf())) {
                 return accumulator;
             };
-            const { gridRowStart, gridRowEnd } = determineGridRowCoordinates(currentEvent);
+            const { 
+                gridRowStart, 
+                gridRowEnd 
+            } = determineGridRowCoordinates(currentEvent.start, currentEvent.end);
             let gridColumnStart;
             for (let i = 2; i <= (events.length + 1); i++) {
                 const isOverlapping = eventOverlapRecord.some((event) => {
@@ -195,7 +222,13 @@ export default function DayPanel(props) {
             <div className='events-container--day-panel'>
                 {eventComponents}
             </div>
-            {dailyHourBlockElements}
+            <div className='form-selection-container--day-panel'>
+                {(timeSelectMode.eventStart || timeSelectMode.eventEnd) 
+                && renderFormSelectionMarker()}
+            </div>
+            <div className='hour-blocks-container'>
+                {dailyHourBlockElements}
+            </div>
         </div>
     );
 };
