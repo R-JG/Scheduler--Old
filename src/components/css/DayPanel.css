@@ -50,7 +50,7 @@
     position: absolute;
     display: grid;
     grid-template-columns: 5em;
-    grid-auto-columns: 1.5em;
+    grid-auto-columns: 1.5rem;
     grid-template-rows: repeat(calc(42 * 24), var(--hour-height));
     column-gap: 1em;
     pointer-events: none;

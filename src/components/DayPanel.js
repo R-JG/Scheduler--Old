@@ -157,6 +157,9 @@ export default function DayPanel(props) {
     // IIFE that returns an array of event components with properties for grid row to position
     // them vertically according to their start and end time, and for grid column to position them
     // horizontally, stacked from the left according to whether or not the event would overlap with another.
+    //
+    // Grid column end is defined conditionally with regards to whether the current event in the loop is selected
+    // in which case extra spaces are taken up to expand the selected item.
     const eventComponents = (() => {
         let eventOverlapRecord = [];
         const elementArray = events.reduce((accumulator, currentEvent) => {
@@ -169,19 +172,31 @@ export default function DayPanel(props) {
                 gridRowEnd 
             } = determineGridRowCoordinates(currentEvent.start, currentEvent.end);
             let gridColumnStart;
-            for (let i = 2; i <= (events.length + 1); i++) {
-                const isOverlapping = eventOverlapRecord.some((event) => {
-                    if (event.gridColumnStart === i) {
-                        return ((event.gridRowStart < gridRowEnd) 
-                        && (event.gridRowEnd > gridRowStart));
-                    };
+            let gridColumnEnd;
+            let columnEndDistance;
+            if ((selection.type === 'event') 
+            && (selection.value.id === currentEvent.id)) {
+                columnEndDistance = 9;
+            } else {
+                columnEndDistance = 1;
+            };
+            for (let i = 2; i <= (events.length + 9); i++) {
+                const possibleColStart = i;
+                const possibleColEnd = i + columnEndDistance;
+                const isOverlapping = eventOverlapRecord.some((recordedEvent) => {
+                    return (
+                        ((recordedEvent.gridColumnStart < possibleColEnd) 
+                        && (recordedEvent.gridColumnEnd > possibleColStart))
+                        && ((recordedEvent.gridRowStart < gridRowEnd) 
+                        && (recordedEvent.gridRowEnd > gridRowStart))
+                    );
                 });
                 if (!isOverlapping) {
-                    gridColumnStart = i;
+                    gridColumnStart = possibleColStart;
+                    gridColumnEnd = possibleColEnd;
                     break;
                 };
             };
-            const gridColumnEnd = gridColumnStart + 1;
             eventOverlapRecord.push({
                 gridRowStart,
                 gridRowEnd,

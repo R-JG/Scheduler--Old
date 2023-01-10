@@ -1,11 +1,12 @@
 .event-column {
+    width: 100%;
     border-radius: 0.6em;
     pointer-events: all;
 }
 
 .expanded-event-column {
     height: 100%;
-    width: 20em;
+    width: 100%;
     padding: 1em;
     border-radius: 0.6em;
     box-sizing: border-box;
