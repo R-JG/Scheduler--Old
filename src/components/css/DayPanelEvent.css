@@ -4,19 +4,6 @@
     pointer-events: all;
 }
 
-.expanded-event-column {
-    height: 100%;
-    width: 100%;
-    padding: 1em;
-    border-radius: 0.6em;
-    box-sizing: border-box;
-    position: relative;
-    z-index: 100;
-    display: flex;
-    flex-direction: column;
-    overflow: scroll;
-}
-
 .event-column-title {
     width: 90%;
     margin: 0;
@@ -43,6 +30,19 @@
 
 .event-column-end p {
     margin: 0;
+}
+
+.expanded-event-column {
+    height: 100%;
+    width: 100%;
+    padding: 1em;
+    border-radius: 0.6em;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
 }
 
 .button--edit-event {

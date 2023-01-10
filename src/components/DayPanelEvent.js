@@ -19,8 +19,6 @@ export default function DayPanelEvent(props) {
         updateSelection
     } = props;
 
-    //console.log(gridItemStyle);
-
     function handleEventClick() {
         if ((selection.type === 'event') 
         && (selection.value.id === event.id)) return;

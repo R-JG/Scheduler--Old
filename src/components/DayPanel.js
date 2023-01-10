@@ -174,8 +174,9 @@ export default function DayPanel(props) {
             let gridColumnStart;
             let gridColumnEnd;
             let columnEndDistance;
-            if ((selection.type === 'event') 
-            && (selection.value.id === currentEvent.id)) {
+            if (((selection.type === 'event') 
+            && (selection.value.id === currentEvent.id)) 
+            || (editEventMode && (eventFormData.id === currentEvent.id))) {
                 columnEndDistance = 9;
             } else {
                 columnEndDistance = 1;
