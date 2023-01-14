@@ -24,34 +24,6 @@ export default function Calendar(props) {
         return monthArray[calendarDates[10].getMonth()];
     })();
 
-    /*
-    const CalendarEventComponents = events.reduce((accumulator, eventItem, index) => {
-        const eventGridItemCoordinates = dateGridItemCoordinates.filter((gridItem) => {
-                return ((gridItem.date.toDateString() === eventItem.start.toDateString())
-                || (gridItem.date.toDateString() === eventItem.end.toDateString())
-                || (((gridItem.date.valueOf() >= eventItem.start.valueOf())
-                    && (gridItem.date.valueOf() <= eventItem.end.valueOf()))));
-            }
-        );
-        const rowOrderStyle = {
-            zIndex: `${index + 50}`,
-            bottom: `${5 * index}%`,
-            left: `${1.5 * index}%`
-        };
-        if (eventGridItemCoordinates.length !== 0) accumulator.push(
-            <CalendarEvent 
-                key={eventItem.id}
-                event={eventItem}
-                gridCoordinates={eventGridItemCoordinates}
-                rowOrderStyle={rowOrderStyle}
-                selection={selection}
-                updateSelection={updateSelection}
-            />
-        );
-        return accumulator;
-    }, []);
-    */
-
     // Create components for each date in calendarDates.
     const CalendarDateComponents = calendarDates.map((date, index) => (
         <CalendarDate 

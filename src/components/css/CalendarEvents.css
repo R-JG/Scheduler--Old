@@ -10,16 +10,24 @@
 }
 
 .event-row-container {
+    padding-top: 2em;
+    padding-bottom: 1em;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
+    grid-auto-rows: 0.5em;
+    grid-auto-flow: dense;
+    overflow: hidden;
+}
+
+.event-row-container:hover {
+    grid-auto-rows: 1.2em;
+    overflow: scroll;
 }
 
 .event-row {
     height: 1.2em;
-    margin-top: 4em;
-    border: 0.2em solid transparent;
+    border: 0.1em solid transparent;
     border-radius: 0.7em;
-    grid-row: 1 / 2;
     position: relative;
     display: flex;
     flex-direction: row;
@@ -27,6 +35,7 @@
     align-items: center;
     pointer-events: all;
     user-select: none;
+    cursor: pointer;
 }
 
 .event-title {

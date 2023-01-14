@@ -50,6 +50,7 @@ export default function CalendarEvents(props) {
             || (((gridItem.date.valueOf() >= eventItem.start.valueOf())
             && (gridItem.date.valueOf() <= eventItem.end.valueOf()))));
         });
+        if (eventGridItemCoordinates.length === 0) return accumulator;
         const eventRowFactory = (index) => {
             const isFirstRow = (index === 0);
             return {
@@ -74,11 +75,10 @@ export default function CalendarEvents(props) {
         return accumulator;
     }, [[], [], [], [], [], []]);
 
-    // Sort eventRows so that the longer event rows are first in each array of rows.
+    // Sort the event rows so that the longer ones are placed first in each array of rows.
     eventRows.forEach((row) => row.sort((a, b) => {
         const aLength = a.columnEnd - a.columnStart;
         const bLength = b.columnEnd - b.columnStart;
-        console.log(aLength);
         if (bLength > aLength) return 1;
     }));
 
@@ -86,7 +86,7 @@ export default function CalendarEvents(props) {
     // a grid container element representing the calendar row.
     const rowElements = eventRows.map((row, rowIndex) => {
         const eventElements = row.map((eventRow, eventIndex) => {
-            let overlapCount = 0;
+            let overlapCount = 1;
             eventRows[rowIndex].forEach((event, index) => {
                 if ((index < eventIndex) && ((eventRow.columnStart < event.columnEnd) 
                 && (eventRow.columnEnd > event.columnStart))) {
@@ -95,8 +95,8 @@ export default function CalendarEvents(props) {
             });
             const style = {
                 gridColumn: `${eventRow.columnStart} / ${eventRow.columnEnd}`,
+                gridRow: `${overlapCount} / ${overlapCount + 1}`,
                 backgroundColor: `hsl(${eventRow.event.color})`,
-                bottom: `${8 * overlapCount}%`,
             };
             return (
                 <div

@@ -2,6 +2,7 @@
     width: 100%;
     border-radius: 0.6em;
     pointer-events: all;
+    cursor: pointer;
 }
 
 .event-column-title {
@@ -43,6 +44,7 @@
     display: flex;
     flex-direction: column;
     overflow: scroll;
+    cursor: auto;
 }
 
 .button--edit-event {
