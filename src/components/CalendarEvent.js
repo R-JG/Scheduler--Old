@@ -1,3 +1,7 @@
+/**
+ * * * Depreciated Component * * *
+ * 
+ * 
 import React from 'react';
 import './css/CalendarEvent.css';
 
@@ -6,6 +10,7 @@ export default function CalendarEvent(props) {
     const { 
         event,
         gridCoordinates,
+        rowOrderStyle,
         selection,
         updateSelection,
     } = props;
@@ -42,16 +47,17 @@ export default function CalendarEvent(props) {
     })();
 
     const eventBlockElements = eventBlocks.map((block) => {
-        const gridItemStyle = {
+        const style = {
             gridColumn: `${block.columnStart} / ${block.columnEnd}`,
             gridRow: `${block.rowStart} / ${block.rowEnd}`,
-            backgroundColor: `hsl(${event.color})`
+            backgroundColor: `hsl(${event.color})`,
+            ...rowOrderStyle
         };
         return (
             <div
-                key={gridItemStyle.gridRow}
+                key={style.gridRow}
                 className={`event-block ${renderAsSelectedEvent()}`}
-                style={gridItemStyle}
+                style={style}
                 onClick={handleClick}
             >
                 {(eventBlocks[0] === block) 
@@ -66,3 +72,4 @@ export default function CalendarEvent(props) {
         </div>
     );
 };
+*/

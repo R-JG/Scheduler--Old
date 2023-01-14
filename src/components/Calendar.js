@@ -1,6 +1,6 @@
 import React from 'react';
 import CalendarDate from './CalendarDate';
-import CalendarEvent from './CalendarEvent';
+import CalendarEvents from './CalendarEvents';
 import './css/Calendar.css';
 
 export default function Calendar(props) {
@@ -24,27 +24,8 @@ export default function Calendar(props) {
         return monthArray[calendarDates[10].getMonth()];
     })();
 
-    // Derive the grid item coordinates corresponding to each date in calendarDates, 
-    // which is a set of 42 that gets arranged in a 7 x 6 rectangle, via their index numbers. 
-    const dateGridItemCoordinates = calendarDates.map((date, index) => (
-        {
-            date,
-            columnStart: index % 7 + 1,
-            columnEnd: index % 7 + 2,
-            rowStart: Math.ceil((index + 1) / 7),
-            rowEnd: Math.ceil((index + 1) / 7) + 1
-        }
-    ));
-
-    // Create a CalendarEvent component for each event.
-    // The component is a grid container matching the dimensions of the Calendar
-    // in which there are multiple different rows created at the grid coordinates 
-    // of each calendar date that the event covers.
-    //
-    // The dateGridItemCoordinates array is filtered to return only the coordiantes
-    // of the grid pertaining to the event.
-    // This set of coordinates for the event is then passed to the component.
-    const CalendarEventComponents = events.reduce((accumulator, eventItem) => {
+    /*
+    const CalendarEventComponents = events.reduce((accumulator, eventItem, index) => {
         const eventGridItemCoordinates = dateGridItemCoordinates.filter((gridItem) => {
                 return ((gridItem.date.toDateString() === eventItem.start.toDateString())
                 || (gridItem.date.toDateString() === eventItem.end.toDateString())
@@ -52,17 +33,24 @@ export default function Calendar(props) {
                     && (gridItem.date.valueOf() <= eventItem.end.valueOf()))));
             }
         );
+        const rowOrderStyle = {
+            zIndex: `${index + 50}`,
+            bottom: `${5 * index}%`,
+            left: `${1.5 * index}%`
+        };
         if (eventGridItemCoordinates.length !== 0) accumulator.push(
             <CalendarEvent 
                 key={eventItem.id}
                 event={eventItem}
                 gridCoordinates={eventGridItemCoordinates}
+                rowOrderStyle={rowOrderStyle}
                 selection={selection}
                 updateSelection={updateSelection}
             />
         );
         return accumulator;
     }, []);
+    */
 
     // Create components for each date in calendarDates.
     const CalendarDateComponents = calendarDates.map((date, index) => (
@@ -96,9 +84,12 @@ export default function Calendar(props) {
             <div className='calendar-container'>
                 {CalendarDateComponents}
             </div>
-            <div className='events-container--calendar'>
-                {CalendarEventComponents}
-            </div>
+            <CalendarEvents 
+                calendarDates={calendarDates}
+                events={events}
+                selection={selection}
+                updateSelection={updateSelection}
+            />
         </div>
     );
 };

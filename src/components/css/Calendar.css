@@ -26,11 +26,3 @@
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(6, 1fr);
 }
-
-.events-container--calendar {
-    height: 40rem;
-    width: 40rem;
-    position: absolute;
-    z-index: 2;
-    pointer-events: none;
-}
