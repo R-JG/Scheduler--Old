@@ -11,6 +11,7 @@ export default function Calendar(props) {
         selection,
         events,
         eventFormData,
+        editEventMode,
         timeSelectMode,
         changeMonth,
         updateSelection,
@@ -59,6 +60,8 @@ export default function Calendar(props) {
             <CalendarEvents 
                 calendarDates={calendarDates}
                 events={events}
+                eventFormData={eventFormData}
+                editEventMode={editEventMode}
                 selection={selection}
                 updateSelection={updateSelection}
             />

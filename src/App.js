@@ -136,6 +136,7 @@ export default function App() {
                 selection={selection}
                 events={events}
                 eventFormData={eventFormData}
+                editEventMode={editEventMode}
                 timeSelectMode={timeSelectMode}
                 changeMonth={changeMonth}
                 updateSelection={updateSelection}

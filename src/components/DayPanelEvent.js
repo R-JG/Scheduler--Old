@@ -22,6 +22,7 @@ export default function DayPanelEvent(props) {
     function handleEventClick() {
         if ((selection.type === 'event') 
         && (selection.value.id === event.id)) return;
+        if (editEventMode && (eventFormData.id !== event.id)) return;
         updateSelection('event', event);
     };
 

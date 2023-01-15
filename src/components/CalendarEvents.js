@@ -6,11 +6,14 @@ export default function CalendarEvents(props) {
     const { 
         calendarDates, 
         events,
+        eventFormData,
+        editEventMode,
         selection,
         updateSelection
     } = props;
 
     function handleEventRowClick(event) {
+        if (editEventMode && (eventFormData.id !== event.id)) return;
         updateSelection('event', event);
     };
 

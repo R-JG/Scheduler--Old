@@ -112,7 +112,53 @@ export default function DayPanel(props) {
         );
     };
 
-    const hoursOfDayElementArrayFactory = (date) => Array.from(
+    function updateFormMinutes(e) {
+        const value = Number(e.target.value);
+        if ((typeof value !== 'number') 
+        || ((value > 59) || (value < 0))) return;
+        if (timeSelectMode.eventStart) {
+            const startDate = eventFormData.start;
+            startDate.setMinutes(value);
+            updateEventFormTimes(startDate);
+        };
+        if (timeSelectMode.eventEnd) {
+            const endDate = eventFormData.end;
+            endDate.setMinutes(value);
+            updateEventFormTimes(endDate);
+        };
+    };
+
+    const renderMinuteSelectionBox = (hourId) => {
+        if ((timeSelectMode.eventStart 
+        && (typeof eventFormData.start === 'object')) 
+        && ((eventFormData.start.toDateString() + ' ' + 
+        eventFormData.start.getHours()) === hourId)) {
+            const startMinutes = eventFormData.start.getMinutes();
+            return MinuteSelectionBox(startMinutes);
+        };
+        if ((timeSelectMode.eventEnd 
+        && (typeof eventFormData.end === 'object')) 
+        && ((eventFormData.end.toDateString() + ' ' + 
+        eventFormData.end.getHours()) === hourId)) {
+            const endMinutes = eventFormData.end.getMinutes();
+            return MinuteSelectionBox(endMinutes);
+        };
+    };
+
+    const MinuteSelectionBox = (currentMinutes) => (
+        <div className='minute-selection-box'>
+            <input 
+                className='minute-input'
+                type='number' 
+                min='0' 
+                max='59'
+                defaultValue={currentMinutes}
+                onChange={updateFormMinutes}/>
+            <span>min</span>
+        </div>
+    );
+
+    const HoursOfDayArray = (date) => Array.from(
         {length: 24}, 
         (value, index) => {
             const id = `${date.toDateString()} ${index}`
@@ -124,6 +170,7 @@ export default function DayPanel(props) {
                 <div className='hour-text'>
                     {convertHourFormat(index)}
                 </div>
+                {renderMinuteSelectionBox(id)}
             </div>
         );}
     );
@@ -139,7 +186,7 @@ export default function DayPanel(props) {
                 <div className='date-separator'>
                     {date.toDateString()}
                 </div>
-                {hoursOfDayElementArrayFactory(date)}
+                {HoursOfDayArray(date)}
             </div>
         )
     );

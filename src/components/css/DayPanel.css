@@ -69,3 +69,19 @@
     grid-column: 1 / 2;
     background-color: rgba(128, 128, 128, 0.5);
 }
+
+.minute-selection-box {
+    font-size: 0.75em;
+    height: 25%;
+    width: 10%;
+    padding: 1%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.minute-input {
+    height: 90%;
+    width: 52%;
+}
