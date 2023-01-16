@@ -61,16 +61,29 @@ export default function DayPanel(props) {
         );
     };
 
-    function delegateClickForHourSelection(e) {
-        if (!timeSelectMode.eventStart 
-            && !timeSelectMode.eventEnd) return;
+    function selectDate(dateObject) {
+        updateSelection('date', dateObject);
+    };
+
+    function updateFormHours(dateObject, hourValue) {
+        dateObject.setHours(hourValue);
+        updateEventFormTimes(hourValue);
+    };
+
+    function delegateHourClick(e) {
         if (!(e.target.classList.contains('hour'))) return;
         const idArray = e.target.id.split(' ');
         let hourValue = idArray.pop();
         const dateValue = idArray.join(' ');
-        const nextDate = new Date(dateValue)
-        nextDate.setHours(hourValue);
-        updateEventFormTimes(nextDate);
+        const dateObject = new Date(dateValue);
+        if (editEventMode) {
+            if (timeSelectMode.eventStart 
+            || timeSelectMode.eventEnd) {
+                updateFormHours(dateObject, hourValue);
+            };
+        } else {
+            selectDate(dateObject);
+        };
     };
 
     function convertHourFormat(hour) {
@@ -283,7 +296,7 @@ export default function DayPanel(props) {
         <div 
             ref={dayPanelRef} 
             className='DayPanel'
-            onClick={delegateClickForHourSelection}>
+            onClick={delegateHourClick}>
             <div className='events-container--day-panel'>
                 {createEventComponentsArray()}
             </div>
