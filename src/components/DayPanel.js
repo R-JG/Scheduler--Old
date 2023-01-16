@@ -10,6 +10,7 @@ export default function DayPanel(props) {
         selection,
         eventFormData,
         events,
+        createEventMode,
         editEventMode,
         timeSelectMode,
         setTimeSelectMode,
@@ -67,7 +68,7 @@ export default function DayPanel(props) {
 
     function updateFormHours(dateObject, hourValue) {
         dateObject.setHours(hourValue);
-        updateEventFormTimes(hourValue);
+        updateEventFormTimes(dateObject);
     };
 
     function delegateHourClick(e) {
@@ -81,6 +82,8 @@ export default function DayPanel(props) {
             || timeSelectMode.eventEnd) {
                 updateFormHours(dateObject, hourValue);
             };
+        } else if(createEventMode) {
+            updateFormHours(dateObject, hourValue);
         } else {
             selectDate(dateObject);
         };

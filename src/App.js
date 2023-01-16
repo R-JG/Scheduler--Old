@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Calendar from './components/Calendar';
 import EventCreationPanel from './components/EventCreationPanel';
 import DayPanel from './components/DayPanel';
@@ -11,8 +11,10 @@ export default function App() {
     const [ calendarDates, setCalendarDates ] = useState(
         generateDates(currentDate.getFullYear(), currentDate.getMonth())
     );
-    const [ selection, setSelection ] = useState({type: 'date', value: currentDate});
-    const [ events, setEvents ] = useState([]);
+    const [ selection, setSelection ] = useState(
+        {type: 'date', value: currentDate}
+    );
+    const [ events, setEvents ] = useState(getEventsFromLocalStorage() || []);
     const [ eventFormData, setEventFormData ] = useState(
         {start: '', end: '', title: '', description: ''}
     );
@@ -21,6 +23,36 @@ export default function App() {
     );
     const [ createEventMode, setCreateEventMode ] = useState(false);
     const [ editEventMode, setEditEventMode ] = useState(false);
+
+    useEffect(() => {
+        saveEventsToLocalStorage();
+    }, [events]);
+
+    function saveEventsToLocalStorage() {
+        const storageEvents = events.map((event) => {
+            return {
+                ...event,
+                start: event.start.valueOf(),
+                end: event.end.valueOf()
+            };
+        });
+        localStorage.setItem(
+            'scheduler-events', JSON.stringify(storageEvents)
+        );
+    };
+
+    function getEventsFromLocalStorage() {
+        const storageEvents = JSON.parse(
+            localStorage.getItem('scheduler-events')
+        );
+        return storageEvents.map((event) => {
+            return {
+                ...event,
+                start: new Date(event.start),
+                end: new Date(event.end)
+            };
+        });
+    };
 
     function generateDates(year, month) {
         const dateArray = [];
@@ -169,6 +201,7 @@ export default function App() {
                     selection={selection}
                     eventFormData={eventFormData}
                     events={events}
+                    createEventMode={createEventMode}
                     editEventMode={editEventMode}
                     timeSelectMode={timeSelectMode}
                     setTimeSelectMode={setTimeSelectMode}
