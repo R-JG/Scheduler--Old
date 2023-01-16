@@ -18,15 +18,15 @@ export default function Calendar(props) {
         updateEventFormTimes
     } = props;
 
-    const monthName = (() => {
+    const createMonthName = () => {
         const monthArray = 
             ['January', 'February', 'March', 'April', 'May', 'June', 
             'July', 'August', 'September', 'October', 'November', 'December'];
         return monthArray[calendarDates[10].getMonth()];
-    })();
+    };
 
     // Create components for each date in calendarDates.
-    const CalendarDateComponents = calendarDates.map((date, index) => (
+    const calendarDateComponentsArray = calendarDates.map((date, index) => (
         <CalendarDate 
             key={date.toDateString()}
             date={date}
@@ -47,7 +47,7 @@ export default function Calendar(props) {
                     className='header-button previous-month'
                     onClick={() => changeMonth('previous')}
                 >←</button>
-                <h1 className='month'>{monthName}</h1>
+                <h1 className='month'>{createMonthName()}</h1>
                 <h1 className='year'>{calendarDates[10].getFullYear()}</h1>
                 <button 
                     className='header-button next-month'
@@ -55,7 +55,7 @@ export default function Calendar(props) {
                 >→</button>
             </div>
             <div className='calendar-container'>
-                {CalendarDateComponents}
+                {calendarDateComponentsArray}
             </div>
             <CalendarEvents 
                 calendarDates={calendarDates}

@@ -134,18 +134,18 @@ export default function DayPanel(props) {
         && ((eventFormData.start.toDateString() + ' ' + 
         eventFormData.start.getHours()) === hourId)) {
             const startMinutes = eventFormData.start.getMinutes();
-            return MinuteSelectionBox(startMinutes);
+            return createMinuteSelectionBox(startMinutes);
         };
         if ((timeSelectMode.eventEnd 
         && (typeof eventFormData.end === 'object')) 
         && ((eventFormData.end.toDateString() + ' ' + 
         eventFormData.end.getHours()) === hourId)) {
             const endMinutes = eventFormData.end.getMinutes();
-            return MinuteSelectionBox(endMinutes);
+            return createMinuteSelectionBox(endMinutes);
         };
     };
 
-    const MinuteSelectionBox = (currentMinutes) => (
+    const createMinuteSelectionBox = (currentMinutes) => (
         <div className='minute-selection-box'>
             <input 
                 className='minute-input'
@@ -158,7 +158,7 @@ export default function DayPanel(props) {
         </div>
     );
 
-    const HoursOfDayArray = (date) => Array.from(
+    const createHoursOfDayArray = (date) => Array.from(
         {length: 24}, 
         (value, index) => {
             const id = `${date.toDateString()} ${index}`
@@ -186,7 +186,7 @@ export default function DayPanel(props) {
                 <div className='date-separator'>
                     {date.toDateString()}
                 </div>
-                {HoursOfDayArray(date)}
+                {createHoursOfDayArray(date)}
             </div>
         )
     );
@@ -201,17 +201,17 @@ export default function DayPanel(props) {
         return {gridRowStart, gridRowEnd};
     };
 
-    // IIFE that returns an array of event components with properties for grid row to position
+    // Factory function that returns an array of event components with properties for grid row to position
     // them vertically according to their start and end time, and for grid column to position them
     // horizontally, stacked from the left according to whether or not the event would overlap with another.
     //
     // Grid column end is defined conditionally with regards to whether the current event in the loop is selected
     // in which case extra spaces are taken up to expand the selected item.
-    const eventComponents = (() => {
+    const createEventComponentsArray = () => {
         let eventOverlapRecord = [];
         const elementArray = events.reduce((accumulator, currentEvent) => {
             if ((currentEvent.end.valueOf() <= calendarDates[0].valueOf()) 
-            || (currentEvent.start.valueOf() >= calendarDates[41].valueOf())) {
+            || (currentEvent.start.valueOf() >= (calendarDates[41].valueOf() + 86400000))) {
                 return accumulator;
             };
             const { 
@@ -277,7 +277,7 @@ export default function DayPanel(props) {
             return accumulator;
         }, []);
         return elementArray;
-    })();
+    };
 
     return (
         <div 
@@ -285,7 +285,7 @@ export default function DayPanel(props) {
             className='DayPanel'
             onClick={delegateClickForHourSelection}>
             <div className='events-container--day-panel'>
-                {eventComponents}
+                {createEventComponentsArray()}
             </div>
             <div className='form-selection-container--day-panel'>
                 {(timeSelectMode.eventStart || timeSelectMode.eventEnd) 
