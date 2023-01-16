@@ -72,8 +72,12 @@ export default function App() {
         setCalendarDates(generateDates(year, month));
     };
 
-    function updateSelection(type, value) {
-        setSelection({type, value});
+    function updateSelection(type, value, source) {
+        if (source === undefined) {
+            setSelection({type, value});
+        } else {
+            setSelection({type, value, source});
+        };
     };
 
     function updateEventFormValue(key, value) {

@@ -30,7 +30,7 @@ export default function DayPanel(props) {
     }, []);
 
     useEffect(() => {
-        if ((selection.type === 'date') 
+        if (((selection.type === 'date') && (selection.source !== 'DayPanel')) 
         && (editEventMode === false)) {
             scrollToDate(selection.value);
         };
@@ -63,7 +63,7 @@ export default function DayPanel(props) {
     };
 
     function selectDate(dateObject) {
-        updateSelection('date', dateObject);
+        updateSelection('date', dateObject, 'DayPanel');
     };
 
     function updateFormHours(dateObject, hourValue) {
