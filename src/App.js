@@ -161,7 +161,7 @@ export default function App() {
 
     function getRandomHSLColor() {
         const randomNumber = Math.floor(Math.random() * 361);
-        return `${randomNumber}, 100%, 50%`;
+        return `hsl(${randomNumber}, 100%, 50%)`;
     };
 
     return (

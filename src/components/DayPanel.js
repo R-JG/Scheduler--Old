@@ -30,7 +30,8 @@ export default function DayPanel(props) {
     }, []);
 
     useEffect(() => {
-        if (((selection.type === 'date') && (selection.source !== 'DayPanel')) 
+        if (((selection.type === 'date') 
+        && (selection.source !== 'DayPanel')) 
         && (editEventMode === false)) {
             scrollToDate(selection.value);
         };
@@ -54,7 +55,16 @@ export default function DayPanel(props) {
 
     function scrollToEvent(eventObject) {
         if (typeof eventObject !== 'object') return;
-        const eventIndex = events.findIndex((eventItem) => (
+        const eventsOnCalendar = events.reduce((accumulator, currentEvent) => {
+            if ((currentEvent.end.valueOf() <= calendarDates[0].valueOf()) 
+            || (currentEvent.start.valueOf() >= (calendarDates[41].valueOf() + 86400000))) {
+                return accumulator;
+            } else {
+                accumulator.push(currentEvent);
+            };
+            return accumulator;
+        }, []);
+        const eventIndex = eventsOnCalendar.findIndex((eventItem) => (
             eventItem.id === eventObject.id
         ));
         dayPanelRef.current.children[0].children[eventIndex].scrollIntoView(
@@ -82,7 +92,8 @@ export default function DayPanel(props) {
             || timeSelectMode.eventEnd) {
                 updateFormHours(dateObject, hourValue);
             };
-        } else if(createEventMode) {
+        } else if(createEventMode 
+            && (timeSelectMode.eventStart || timeSelectMode.eventEnd)) {
             updateFormHours(dateObject, hourValue);
         } else {
             selectDate(dateObject);
@@ -270,7 +281,7 @@ export default function DayPanel(props) {
             const gridItemStyle = {
                 gridRow: `${gridRowStart} / ${gridRowEnd}`,
                 gridColumn: `${gridColumnStart} / ${gridColumnEnd}`,
-                backgroundColor: `hsl(${currentEvent.color})`
+                backgroundColor: currentEvent.color
             };
             accumulator.push(
                 <DayPanelEvent 

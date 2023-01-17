@@ -70,7 +70,7 @@ export default function DayPanelEvent(props) {
                     return (
                         <div
                             className='expanded-event-column'
-                            style={{backgroundColor: `hsl(${event.color})`}}
+                            style={{backgroundColor: event.color}}
                         >
                             <button 
                                 className='button--edit-event'
@@ -102,7 +102,7 @@ export default function DayPanelEvent(props) {
                         <div
                             className='expanded-event-column 
                             expanded-event-column--edit-mode'
-                            style={{backgroundColor: `hsl(${event.color})`}}
+                            style={{backgroundColor: event.color}}
                         >
                             <button
                                 className='button--cancel-edit'

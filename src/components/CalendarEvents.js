@@ -99,7 +99,7 @@ export default function CalendarEvents(props) {
             const style = {
                 gridColumn: `${eventRow.columnStart} / ${eventRow.columnEnd}`,
                 gridRow: `${overlapCount} / ${overlapCount + 1}`,
-                backgroundColor: `hsl(${eventRow.event.color})`,
+                backgroundColor: eventRow.event.color,
             };
             return (
                 <div

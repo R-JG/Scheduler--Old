@@ -22,12 +22,12 @@ export default function EventCreationPanel(props) {
         setCreateEventMode(false);
     };
 
-    function handleChange(event) {
+    function handleFormChange(event) {
         const { name, value } = event.target;
         updateEventFormValue(name, value);
     };
 
-    function handleSubmit(event) {
+    function handleFormSubmit(event) {
         event.preventDefault();
         if (
             (eventFormData.start === '') 
@@ -51,33 +51,34 @@ export default function EventCreationPanel(props) {
         }));
     };
 
-    /*
-    const eventList = events.map((event) => (
-        <div className='temp-event' key={event.id}>
-            <div 
-                className='event-color-tag'
-                style={{backgroundColor: `hsl(${event.color})`}}
-            ></div>
-            <div>{event.title}</div>
-            <div>{`From ${event.start.toDateString()}`}</div>
-            <div>{`To ${event.end.toDateString()}`}</div>
-        </div>
-    ));
-    */
+    function createDateTextElement(dateObject) {
+        const timeString = dateObject.toLocaleTimeString();
+        const processedTimeString = (
+            timeString.substring(0, (timeString.length - 6)) 
+            + timeString.substring((timeString.length - 3), timeString.length)
+        );
+        return (
+            <div className='date-text'>
+                <div>{dateObject.toDateString() + ', '}</div>
+                <div>{processedTimeString}</div>
+            </div>
+        );
+    };
 
     return (
         <div className='EventCreationPanel'>
-            <button 
-                className='button--cancel-event-creation'
-                onClick={closeCreateEvent}>
-                ✕
-            </button>
             <form 
                 className='event-creation-form'
-                onSubmit={handleSubmit}
+                onSubmit={handleFormSubmit}
             >
                 <button className='button--add-event'>
                     Add Event
+                </button>
+                <button 
+                    type='button'
+                    className='button--cancel-event-creation'
+                    onClick={closeCreateEvent}>
+                    ✕
                 </button>
                 <label 
                     className='event-creation-title-label'
@@ -89,7 +90,7 @@ export default function EventCreationPanel(props) {
                     type='text' 
                     name='title'
                     value={eventFormData.title}
-                    onChange={handleChange}
+                    onChange={handleFormChange}
                 />
                 <label 
                     className='event-creation-description-label'
@@ -100,17 +101,14 @@ export default function EventCreationPanel(props) {
                     id='event-creation-form--description'
                     name='description'
                     value={eventFormData.description} 
-                    onChange={handleChange}
+                    onChange={handleFormChange}
                 />
                 <p className='event-creation-start-label'>
                     Start: 
                 </p>
                 <div className='event-creation-form--start'>
-                    <p>
-                        {(typeof eventFormData.start === 'object') 
-                            ? eventFormData.start.toDateString() 
-                            : ''}
-                    </p>
+                    {(typeof eventFormData.start === 'object') 
+                    && createDateTextElement(eventFormData.start)}
                     <button 
                         name='start'
                         className='button--set-start-time'
@@ -124,11 +122,8 @@ export default function EventCreationPanel(props) {
                     End: 
                 </p>
                 <div className='event-creation-form--end'>
-                    <p>
-                        {(typeof eventFormData.end === 'object') 
-                            ? eventFormData.end.toDateString() 
-                            : ''}
-                    </p>
+                    {(typeof eventFormData.end === 'object') 
+                    && createDateTextElement(eventFormData.end)}
                     <button 
                         name='end'
                         className='button--set-end-time'

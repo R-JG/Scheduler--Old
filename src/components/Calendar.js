@@ -26,8 +26,8 @@ export default function Calendar(props) {
     };
 
     const createDayNameElements = () => {
-        const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 
-        'Thursday', 'Friday', 'Saturday'];
+        const dayNames = ['S', 'M', 'T', 'W', 
+        'T', 'F', 'S'];
         return dayNames.map((dayName, index) => (
             <div 
                 key={index + dayName} 
@@ -56,18 +56,18 @@ export default function Calendar(props) {
         <div className='Calendar'>
             <div className='calendar-header'>
                 <button 
-                    className='header-button previous-month'
+                    className='button--previous-month'
                     onClick={() => changeMonth('previous')}
                 >←</button>
-                <h1 className='month'>{getMonthName()}</h1>
-                <h1 className='year'>{calendarDates[10].getFullYear()}</h1>
+                <h1 className='title--month'>{getMonthName()}</h1>
+                <h1 className='title--year'>{calendarDates[10].getFullYear()}</h1>
                 <button 
-                    className='header-button next-month'
+                    className='button--next-month'
                     onClick={() => changeMonth('next')}
                 >→</button>
-            </div>
-            <div className='day-names-container'>
-                {createDayNameElements()}
+                <div className='day-names-container'>
+                    {createDayNameElements()}
+                </div>
             </div>
             <div className='calendar-container'>
                 {calendarDateComponentsArray}
