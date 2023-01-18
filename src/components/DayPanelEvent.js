@@ -100,45 +100,55 @@ export default function DayPanelEvent(props) {
                 if (eventFormData.id === event.id) {
                     return (
                         <div
-                            className='expanded-event-column 
-                            expanded-event-column--edit-mode'
+                            className='expanded-event-column'
                             style={{backgroundColor: event.color}}
                         >
-                            <button
-                                className='button--cancel-edit'
-                                onClick={endEventEdit}
-                            >
-                                Cancel Edit
-                            </button>
-                            <button 
-                                className='button--delete-event'
-                                onClick={() => deleteEvent(event)}
-                            >
-                                Delete Event
-                            </button>
                             <form
+                                className='event-edit-form'
                                 onSubmit={handleFormSubmit}
                             >
                                 <button className='button--confirm-edit'>
                                     Confirm Edit
                                 </button>
+                                <button 
+                                    type='button'
+                                    className='button--delete-event'
+                                    onClick={() => deleteEvent(event)}
+                                >
+                                    Delete Event
+                                </button>
+                                <button
+                                    type='button'
+                                    className='button--cancel-edit'
+                                    onClick={endEventEdit}
+                                >
+                                    Cancel Edit
+                                </button>
+                                <span className='event-edit-form--title-label'>
+                                    Title:
+                                </span>
                                 <input
+                                    className='event-edit-form--title'
                                     type='text'
                                     name='title'
                                     value={eventFormData.title}
                                     onChange={handleFormChange}
                                 />
+                                <span className='event-edit-form--description-label'>
+                                    Description:
+                                </span>
                                 <textarea
+                                    className='event-edit-form--description'
                                     name='description'
                                     value={eventFormData.description}
                                     onChange={handleFormChange}
                                 />
-                                <div>
-                                    <p>Start: </p>
-                                    <p>
-                                        {(typeof eventFormData.start === 'object') 
-                                            ? eventFormData.start.toDateString() 
-                                            : ''}
+                                <span className='event-edit-form--start-label'>
+                                    Start:
+                                </span>
+                                <div className='event-edit-form--start'>
+                                    <p className='event-edit-form--start-value'>
+                                        {processDateString(eventFormData.start)}
                                     </p>
                                     <button 
                                         name='start'
@@ -149,12 +159,12 @@ export default function DayPanelEvent(props) {
                                         {(timeSelectMode.eventStart) ? '✓' : 'Set Start Time'}
                                     </button>
                                 </div>
-                                <div>
-                                    <p>End: </p>
-                                    <p>
-                                        {(typeof eventFormData.end === 'object') 
-                                            ? eventFormData.end.toDateString() 
-                                            : ''}
+                                <span className='event-edit-form--end-label'>
+                                    End:
+                                </span>
+                                <div className='event-edit-form--end'>
+                                    <p className='event-edit-form--end-value'>
+                                        {processDateString(eventFormData.end)}
                                     </p>
                                     <button 
                                         name='end'

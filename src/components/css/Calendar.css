@@ -18,17 +18,27 @@
 }
 
 .button--previous-month {
+    background-color: transparent;
+    font-weight: 700;
     height: 3em;
     width: 3em;
+    border-radius: 1em;
+    border: 0.18em solid #272d2d;
     grid-column: 1 / 2;
     grid-row: 1 / 2;
+    cursor: pointer;
 }
 
 .button--next-month {
+    background-color: transparent;
+    font-weight: 700;
     height: 3em;
     width: 3em;
+    border-radius: 1em;
+    border: 0.18em solid #272d2d;
     grid-column: 7 / 8;
     grid-row: 1 / 2;
+    cursor: pointer;
 }
 
 .title--month {

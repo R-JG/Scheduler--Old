@@ -183,7 +183,9 @@ export default function App() {
                 <div className='second-section-header'>
                     <button
                         className='button--create-event'
-                        onClick={() => (!editEventMode) ? setCreateEventMode(true) : undefined}
+                        onClick={() => (!editEventMode) 
+                            ? setCreateEventMode(true) 
+                            : undefined}
                     >
                         Create Event
                     </button>

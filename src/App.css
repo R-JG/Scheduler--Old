@@ -34,5 +34,12 @@
 }
 
 .button--create-event {
-  margin-inline: 2em;
+  background-color: transparent;
+  font-weight: 700;
+  padding: 0.5em;
+  margin-left: 2.5em;
+  margin-bottom: 1em;
+  border-radius: 1em;
+  border: 0.18em solid #272d2d;
+  cursor: pointer;
 }
