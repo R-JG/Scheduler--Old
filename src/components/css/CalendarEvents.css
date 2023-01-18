@@ -15,12 +15,13 @@
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-auto-rows: 0.5em;
-    grid-auto-flow: dense;
+    row-gap: 0;
     overflow: hidden;
+    transition: 0.35s ease;
 }
 
 .event-row-container:hover {
-    grid-auto-rows: 1.2em;
+    row-gap: 1em;
     overflow: scroll;
 }
 
