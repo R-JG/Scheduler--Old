@@ -6,6 +6,19 @@
   --panel-item-outline: 0.09rem solid #272d2d;
 }
 
+button {
+  color: #272d2d;
+}
+
+button:hover {
+  color: cadetblue;
+  border-color: cadetblue;
+}
+
+button:active {
+  background-color: rgba(135, 225, 255, 0.3);
+}
+
 .App {
   color: #272d2d;
   background-color: #FEFCFB;
@@ -42,4 +55,16 @@
   border-radius: 1em;
   border: 0.18em solid #272d2d;
   cursor: pointer;
+}
+
+.inactive-button {
+  opacity: 0.2;
+  cursor: initial;
+}
+
+.active-button {
+  color: cadetblue;
+  background-color: rgba(135, 225, 255, 0.3);
+  border-color: cadetblue;
+  opacity: 0.8;
 }

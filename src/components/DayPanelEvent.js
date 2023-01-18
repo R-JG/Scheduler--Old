@@ -8,6 +8,7 @@ export default function DayPanelEvent(props) {
         gridItemStyle, 
         selection,
         eventFormData,
+        createEventMode,
         editEventMode,
         timeSelectMode,
         setTimeSelectMode,
@@ -54,6 +55,10 @@ export default function DayPanelEvent(props) {
         }));
     };
 
+    function renderAsInactiveButton() {
+        return (createEventMode) ? 'inactive-button' : '';
+    };
+
     function processDateString(dateObject) {
         const timeString = dateObject.toLocaleTimeString();
         const processedTimeString = (
@@ -73,7 +78,9 @@ export default function DayPanelEvent(props) {
                             style={{backgroundColor: event.color}}
                         >
                             <button 
-                                className='button--edit-event'
+                                className={
+                                    `button--edit-event 
+                                    ${renderAsInactiveButton()}`}
                                 onClick={() => stageEventEdit(event)}
                             >
                                 ⛭
@@ -152,11 +159,14 @@ export default function DayPanelEvent(props) {
                                     </p>
                                     <button 
                                         name='start'
-                                        className='button--set-start-time--DayPanel'
+                                        className={
+                                            `button--set-start-time--DayPanel 
+                                            ${(timeSelectMode.eventStart) 
+                                                ? 'active-button' : ''}`}
                                         type='button'
                                         onClick={handleFormTimeButtons}
                                     >
-                                        {(timeSelectMode.eventStart) ? '✓' : 'Set Start Time'}
+                                        Set Start Time
                                     </button>
                                 </div>
                                 <span className='event-edit-form--end-label'>
@@ -168,11 +178,14 @@ export default function DayPanelEvent(props) {
                                     </p>
                                     <button 
                                         name='end'
-                                        className='button--set-end-time--DayPanel'
+                                        className={
+                                            `button--set-end-time--DayPanel 
+                                            ${(timeSelectMode.eventEnd) 
+                                                ? 'active-button' : ''}`}
                                         type='button'
                                         onClick={handleFormTimeButtons}
                                     >
-                                        {(timeSelectMode.eventEnd) ? '✓' : 'Set End Time'}
+                                        Set End Time
                                     </button>
                                 </div>  
                             </form>

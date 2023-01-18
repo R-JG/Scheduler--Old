@@ -111,11 +111,14 @@ export default function EventCreationPanel(props) {
                     && createDateTextElement(eventFormData.start)}
                     <button 
                         name='start'
-                        className='button--set-start-time'
+                        className={
+                            `button--set-start-time--EventCreationPanel 
+                            ${(timeSelectMode.eventStart) 
+                                ? 'active-button' : ''}`}
                         type='button'
                         onClick={handleSetTimeButtons}
                     >
-                        {(timeSelectMode.eventStart) ? '✓' : 'Set Start Time'}
+                        Set Start Time
                     </button>
                 </div>
                 <p className='event-creation-end-label'>
@@ -126,11 +129,14 @@ export default function EventCreationPanel(props) {
                     && createDateTextElement(eventFormData.end)}
                     <button 
                         name='end'
-                        className='button--set-end-time'
+                        className={
+                            `button--set-end-time--EventCreationPanel 
+                            ${(timeSelectMode.eventEnd) 
+                                ? 'active-button' : ''}`}
                         type='button'
                         onClick={handleSetTimeButtons}
                     >
-                        {(timeSelectMode.eventEnd) ? '✓' : 'Set End Time'}
+                        Set End Time
                     </button>
                 </div>                
             </form>

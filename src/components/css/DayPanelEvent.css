@@ -111,7 +111,7 @@
     background-color: transparent;
     width: 12.5em;
     padding: 0.3em;
-    border-radius: 0.2em;
+    border-radius: 0.7em;
     border: 0.1em solid #272d2d;
     grid-column: 2 / 3;
     grid-row: 2 / 3;
@@ -126,7 +126,7 @@
     background-color: transparent;
     width: 12.5em;
     padding: 0.3em;
-    border-radius: 0.2em;
+    border-radius: 0.7em;
     border: 0.1em solid #272d2d;
     max-height: 6em;
     min-width: 14em;

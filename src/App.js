@@ -164,6 +164,10 @@ export default function App() {
         return `hsl(${randomNumber}, 100%, 50%)`;
     };
 
+    function renderAsInactiveButton() {
+        return (editEventMode) ? 'inactive-button' : '';
+    };
+
     return (
         <main className='App'>
             <Calendar 
@@ -182,7 +186,9 @@ export default function App() {
                 {!createEventMode && 
                 <div className='second-section-header'>
                     <button
-                        className='button--create-event'
+                        className={
+                            `button--create-event 
+                            ${renderAsInactiveButton()}`}
                         onClick={() => (!editEventMode) 
                             ? setCreateEventMode(true) 
                             : undefined}

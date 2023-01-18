@@ -290,6 +290,7 @@ export default function DayPanel(props) {
                     gridItemStyle={gridItemStyle}
                     selection={selection}
                     eventFormData={eventFormData}
+                    createEventMode={createEventMode}
                     editEventMode={editEventMode}
                     timeSelectMode={timeSelectMode}
                     setTimeSelectMode={setTimeSelectMode}
