@@ -1,17 +1,17 @@
 .CalendarDate {
-    border: 0.09em solid #272d2d;
+    outline: var(--panel-item-outline);
     user-select: none;
 }
 
 .date {
     position: relative;
     top: 0.25em;
-    left: 0.5em;
+    left: 0.9em;
 }
 
 .selected-date {
-    border-width: 0.2em;
-    border-color: cadetblue;
+    border: 0.2em solid cadetblue;
+    z-index: 10;
 }
 
 .current-date {

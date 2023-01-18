@@ -1,3 +1,11 @@
+:root {
+  --main-panel-height: 40rem;
+  --main-panel-width: 40rem;
+  --main-panel-border-radius: 2rem;
+  --main-panel-outline: 0.45rem solid #272d2d;
+  --panel-item-outline: 0.09rem solid #272d2d;
+}
+
 .App {
   color: #272d2d;
   background-color: #FEFCFB;

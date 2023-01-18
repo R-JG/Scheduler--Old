@@ -1,9 +1,10 @@
 .EventCreationPanel {
     box-sizing: border-box;
-    width: 40rem;
+    width: var(--main-panel-width);
     padding: 1em;
-    margin-block: 1.5em;
-    border: 0.31rem solid #272d2d;
+    margin-block: 2em;
+    border-radius: var(--main-panel-border-radius);
+    outline: var(--main-panel-outline);
 }
 
 .event-creation-form {

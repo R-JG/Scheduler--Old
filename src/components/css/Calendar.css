@@ -59,12 +59,14 @@
 
 .calendar-container {
     box-sizing: border-box;
-    height: 40rem;
-    width: 40rem;
-    border: 0.25rem solid #272d2d;
+    height: var(--main-panel-height);
+    width: var(--main-panel-width);
+    outline: var(--main-panel-outline);
+    border-radius: var(--main-panel-border-radius);
     position: absolute;
     z-index: 1;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(6, 1fr);
+    overflow: hidden;
 }

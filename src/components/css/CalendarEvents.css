@@ -2,7 +2,6 @@
     box-sizing: border-box;
     height: 40rem;
     width: 40rem;
-    border: 0.25rem solid transparent;
     position: absolute;
     z-index: 2;
     display: grid;
@@ -26,8 +25,9 @@
 }
 
 .event-row {
-    height: 1.2em;
-    border: 0.1em solid transparent;
+    box-sizing: border-box;
+    height: 1.5em;
+    border: 0.2em solid transparent;
     border-radius: 0.7em;
     position: relative;
     display: flex;
@@ -45,5 +45,5 @@
 }
 
 .selected-event {
-    border-color: #272d2d;
+    border-color: cadetblue;
 }

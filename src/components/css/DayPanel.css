@@ -4,10 +4,11 @@
 
 .DayPanel {
     box-sizing: border-box;
-    max-height: 40rem;
-    width: 40rem;
+    max-height: var(--main-panel-height);
+    width: var(--main-panel-width);
     margin-inline: 1em;
-    border: 0.25rem solid #272d2d;
+    border-radius: var(--main-panel-border-radius);
+    outline: var(--main-panel-outline);
     overflow: scroll;
     position: relative;
     pointer-events: none;
@@ -28,7 +29,8 @@
 
 .hour {
     height: var(--hour-height);
-    border: 0.075em solid #272d2d;
+    /*border: 0.075em solid #272d2d;*/
+    outline: var(--panel-item-outline);
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
